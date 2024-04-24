@@ -86,26 +86,26 @@ export default function FruitsPage() {
 		}
 	}, [fruit1, fruit2, fruit3, isAnimatingCompleted])
 	return (
-		<div className='bg-[#1a1a1a] m-auto mt-24 border border-[#565656] rounded-lg w-10/12 flex'>
+		<div className='bg-[#1a1a1a] m-auto mt-9 sm:mt-24 border border-[#565656] rounded-lg w-full md:w-10/12 flex flex-col sm:flex-row items-center'>
+			<div className='w-full sm:w-9/12 flex items-center justify-center mt-4 sm:mt-0 mb-4 sm:mb-0'>
+				<div className='border-0 sm:border-4 rounded-sm border-zinc-600 flex gap-2 justify-center w-6/12'>
+					<div className='border-l sm:border-l-0 border-r border-zinc-600 w-[90px] sm:w-[130px] text-7xl flex items-center justify-center py-5'>
+						{fruit1}
+					</div>
+					<div className='border-r border-zinc-600 w-[90px] sm:w-[130px] text-7xl flex items-center justify-center'>
+						{fruit2}
+					</div>
+					<div className='border-r border-zinc-600 w-[90px] sm:w-[130px] text-7xl flex items-center justify-center'>
+						{fruit3}
+					</div>
+				</div>
+			</div>
 			<BetPanel
 				updateHandler={updateFruitsHandler}
 				disabledBetButton={disabledBetButton}
 				setUserBet={setUserBet}
 				userBet={userBet}
 			/>
-			<div className='w-9/12 flex items-center justify-center'>
-				<div className='border-4 rounded-sm border-zinc-600 flex gap-2 justify-center w-6/12'>
-					<div className='border-r border-zinc-600 w-[130px] text-7xl flex items-center justify-center py-5'>
-						{fruit1}
-					</div>
-					<div className='border-r border-zinc-600 w-[130px] text-7xl flex items-center justify-center'>
-						{fruit2}
-					</div>
-					<div className='w-[130px] text-7xl flex items-center justify-center'>
-						{fruit3}
-					</div>
-				</div>
-			</div>
 		</div>
 	)
 }

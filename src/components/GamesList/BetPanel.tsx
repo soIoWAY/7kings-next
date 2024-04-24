@@ -28,7 +28,7 @@ const BetPanel = ({
 		updateHandler()
 	}
 	return (
-		<div className='w-3/12 border-r border-[#565656] p-5'>
+		<div className='w-full md:w-3/12 sm:border-r border-[#565656] p-2 md:p-5'>
 			<div className='flex justify-between mb-2 text-white border-b border-zinc-600'>
 				<span>
 					<span className='text-green-500'>Wins:</span> {userWins}
