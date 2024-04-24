@@ -93,7 +93,7 @@ export default function LoginPage() {
 						LOGIN
 					</button>
 					<span className='text-center text-gray-300'>
-						Don't have an account?{' '}
+						Don't have an account?
 						<Link
 							href='/auth/register'
 							className='text-green-400 font-bold tracking-tight'
