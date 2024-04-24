@@ -48,7 +48,7 @@ export default function RegisterPage() {
 				validateOnBlur={false}
 				onSubmit={submitHandler}
 			>
-				<Form className='flex flex-col gap-4 w-3/12 text-white'>
+				<Form className='flex flex-col gap-4 w-7/12 sm:w-5/12 md:w-4/12 lg:w-3/12 text-white'>
 					<div className='flex flex-col'>
 						<label htmlFor='username' className='text-gray-300 text-sm'>
 							Username
