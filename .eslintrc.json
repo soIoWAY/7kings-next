@@ -1,6 +1,4 @@
 {
 	"extends": "next/core-web-vitals",
-	"rules": {
-		"@typescript-eslint/ban-ts-ignore": "off"
-	}
+	"rules": { "react/no-unescaped-entities": "off" }
 }
