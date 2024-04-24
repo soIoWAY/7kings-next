@@ -48,6 +48,13 @@ const CoinPage = () => {
 	}
 	return (
 		<div className='bg-[#1a1a1a] m-auto mt-9 sm:mt-24 border border-[#565656] rounded-lg w-full md:w-10/12 flex flex-col sm:flex-row items-center'>
+			<BetPanel
+				updateHandler={flipCoinHandler}
+				disabledBetButton={disabledBetButton}
+				setUserBet={setUserBet}
+				userBet={userBet}
+			/>
+
 			<div className='w-full sm:w-9/12 flex flex-col items-center justify-center mt-2 sm:mt-0'>
 				<div className='border-0 sm:border-4 rounded-sm border-zinc-600 relative flex justify-center items-center w-8/12 sm:w-6/12 py-3 sm:py-5'>
 					<div
@@ -72,12 +79,6 @@ const CoinPage = () => {
 					</div>
 				</div>
 			</div>
-			<BetPanel
-				updateHandler={flipCoinHandler}
-				disabledBetButton={disabledBetButton}
-				setUserBet={setUserBet}
-				userBet={userBet}
-			/>
 		</div>
 	)
 }
