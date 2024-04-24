@@ -2,7 +2,7 @@ import Card from './Card'
 
 const Cards = () => {
 	return (
-		<div className='mt-5 flex justify-between'>
+		<div className='mt-5 flex flex-col gap-5 lg:gap-0 lg:flex-row justify-between'>
 			<Card
 				icon='/trophy.svg'
 				h1Text='Participate'

@@ -3,8 +3,8 @@ import BetPanel from '@/components/GamesList/BetPanel'
 import { userStore } from '@/store/user'
 import Image from 'next/image'
 import { useState } from 'react'
-import styles from './CoinPage.module.css'
 
+import styles from './CoinPage.module.css'
 const CoinPage = () => {
 	const [isCoinFlipping, setIsCoinFlipping] = useState(false)
 	const [result, setResult] = useState<number | null>(null)
@@ -33,29 +33,33 @@ const CoinPage = () => {
 	}
 	const flipCoinHandler = () => {
 		const decreasedBalance = userBalance - userBet
-		if (decreasedBalance > 0) {
-			userStore.setState({ balance: decreasedBalance })
-			updateUserInfo(undefined, undefined, decreasedBalance)
-			setIsCoinFlipping(true)
-			setDisabledBetButton(true)
-			const randomResult = Math.round(Math.random())
-			setResult(randomResult)
-			setTimeout(() => {
-				setIsCoinFlipping(false)
-				setDisabledBetButton(false)
-				if (randomResult === 0) {
-					const increasedBalance = userBalance + userBet
-					const newWins = userWins + 1
-					userStore.setState({ wins: newWins, balance: increasedBalance })
-					updateUserInfo(newWins, undefined, increasedBalance)
-				} else {
-					const newLoses = userLoses + 1
-					userStore.setState({ loses: userLoses + 1 })
-					updateUserInfo(undefined, newLoses)
-				}
-			}, 2000)
+		if (userBet >= 1) {
+			if (decreasedBalance > 0) {
+				userStore.setState({ balance: decreasedBalance })
+				updateUserInfo(undefined, undefined, decreasedBalance)
+				setIsCoinFlipping(true)
+				setDisabledBetButton(true)
+				const randomResult = Math.round(Math.random())
+				setResult(randomResult)
+				setTimeout(() => {
+					setIsCoinFlipping(false)
+					setDisabledBetButton(false)
+					if (randomResult === 0) {
+						const increasedBalance = userBalance + userBet
+						const newWins = userWins + 1
+						userStore.setState({ wins: newWins, balance: increasedBalance })
+						updateUserInfo(newWins, undefined, increasedBalance)
+					} else {
+						const newLoses = userLoses + 1
+						userStore.setState({ loses: userLoses + 1 })
+						updateUserInfo(undefined, newLoses)
+					}
+				}, 2000)
+			} else {
+				alert('Недостатньо грошей на балансі')
+			}
 		} else {
-			alert('Недостатньо грошей на балансі')
+			alert('Сума ставки повинна бути більшою за 1')
 		}
 	}
 	return (

@@ -9,7 +9,7 @@ const Aside = () => {
 	const liStyle = 'flex items-center gap-3 hover:text-green-400 transition-all'
 	const linkStyle = 'hover:text-white transition-all flex-1'
 	return (
-		<div className='bg-black py-6 px-4 h-screen flex flex-col justify-between'>
+		<div className='bg-black py-6 px-4 h-screen hidden lg:flex flex-col justify-between'>
 			<div>
 				<ul className='flex flex-col gap-4'>
 					<li className={liStyle}>
@@ -20,7 +20,7 @@ const Aside = () => {
 					</li>
 					<li className={liStyle}>
 						<PiNumberSquareSevenFill />
-						<Link href='/slots' className={linkStyle}>
+						<Link href='/#slots' className={linkStyle}>
 							Slots
 						</Link>
 					</li>
@@ -32,7 +32,7 @@ const Aside = () => {
 					</li>
 					<li className={liStyle}>
 						<BsCoin />
-						<Link href='/coin' className={linkStyle}>
+						<Link href='games/coin' className={linkStyle}>
 							Coin
 						</Link>
 					</li>

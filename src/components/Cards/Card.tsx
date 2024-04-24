@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IoIosArrowForward } from 'react-icons/io'
@@ -21,18 +22,22 @@ const Card = ({
 }: CardProps) => {
 	return (
 		<div
-			className={`flex items-start w-[30%] rounded-md justify-between px-3 py-5 relative ${bg}`}
+			className={`flex items-start w-full lg:w-[30%] rounded-md justify-between px-3 py-5 relative ${bg}`}
 		>
 			<div className='flex flex-col'>
-				<h1 className={`${h1Color} text-2xl uppercase font-semibold`}>
+				<h1
+					className={`${h1Color} text-3xl lg:text-2xl uppercase font-semibold`}
+				>
 					{h1Text}
 				</h1>
 				<h2 className='text-white text-2xl uppercase font-medium'>{h2Text}</h2>
-				<span className='text-sm text-gray-400'>{description}</span>
+				<span className='font-normal text-normal lg:text-sm text-gray-400 pb-9 md:pb-0 '>
+					{description}
+				</span>
 				<div className='absolute bottom-4'>
 					<Link
 						href='/referrals'
-						className='text-white bg-white bg-opacity-30 rounded-full w-8 h-8 mt-5 flex items-center justify-center'
+						className='text-white bg-white bg-opacity-30 rounded-full w-10 h-10 lg:w-8 lg:h-8 mt-5 flex items-center justify-center'
 					>
 						<IoIosArrowForward />
 					</Link>
@@ -40,8 +45,8 @@ const Card = ({
 			</div>
 			<Image
 				src={icon}
-				width={138}
-				height={138}
+				width={130}
+				height={130}
 				alt={h1Text}
 				className='rotate-12'
 			/>

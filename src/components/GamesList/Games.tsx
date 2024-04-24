@@ -8,7 +8,7 @@ const Games = () => {
 				<MdGames className='fill-green-400' />
 				House Games
 			</h3>
-			<div className='flex gap-4'>
+			<div className='flex flex-wrap gap-4'>
 				<Game
 					icon={'/rocket.svg'}
 					bg='bg-gradient-to-tr from-indigo-800 to-fuchsia-500'

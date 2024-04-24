@@ -1,5 +1,7 @@
 import { userStore } from '@/store/user'
 import { useState } from 'react'
+//@ts-ignore
+import useSound from 'use-sound'
 
 interface BetPanel {
 	updateHandler: () => void
@@ -20,6 +22,11 @@ const BetPanel = ({
 	const betChooseButtons =
 		'text-white py-2 w-1/2 hover:bg-zinc-700 transition-all'
 	const [isManual, setIsManual] = useState(true)
+	const [butClick] = useSound('/butClick.mp3', { volume: 0.55 })
+	const betPanelStartManualHandler = () => {
+		butClick()
+		updateHandler()
+	}
 	return (
 		<div className='w-3/12 border-r border-[#565656] p-5'>
 			<div className='flex justify-between mb-2 text-white border-b border-zinc-600'>
@@ -49,7 +56,7 @@ const BetPanel = ({
 			<div>
 				<button
 					className='bg-green-400 w-full text-black mt-4 rounded-md py-2 font-bold hover:bg-green-500 transition-all text-center cursor-pointer'
-					onClick={updateHandler}
+					onClick={betPanelStartManualHandler}
 					disabled={disabledBetButton}
 				>
 					BET

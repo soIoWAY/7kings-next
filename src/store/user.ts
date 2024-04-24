@@ -4,6 +4,7 @@ export const userStore = create(async set => {
 		credentials: 'include',
 	})
 	const data = await response.json()
+	console.log(data)
 
 	set({
 		wins: data.wins || 0,

@@ -26,6 +26,7 @@ export default function LoginPage() {
 			})
 			if (response.ok) {
 				navigate.push('/')
+				window.location.reload()
 			} else {
 				const errorMsg = await response.json()
 				setErrorMessage(errorMsg.msg)
