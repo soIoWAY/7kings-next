@@ -9,7 +9,9 @@ const Aside = () => {
 	const liStyle = 'flex items-center gap-3 hover:text-green-400 transition-all'
 	const linkStyle = 'hover:text-white transition-all flex-1'
 	return (
-		<div className='bg-black py-6 px-4 h-screen hidden lg:flex flex-col justify-between'>
+		<div
+			className={`bg-black py-6 px-4 h-screen hidden lg:flex flex-col justify-between`}
+		>
 			<div>
 				<ul className='flex flex-col gap-4'>
 					<li className={liStyle}>
