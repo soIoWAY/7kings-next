@@ -4,6 +4,7 @@ import { userStore } from '@/store/user'
 import Image from 'next/image'
 import { useState } from 'react'
 
+import { updateUserInfo } from '@/utils/userUpdate'
 import styles from './CoinPage.module.css'
 const CoinPage = () => {
 	const [isCoinFlipping, setIsCoinFlipping] = useState(false)
@@ -13,24 +14,7 @@ const CoinPage = () => {
 	const userLoses = userStore((state: any) => state.loses)
 	const userBalance = userStore((state: any) => state.balance)
 	const [userBet, setUserBet] = useState<number>(1)
-	const updateUserInfo = async (
-		wins?: number,
-		loses?: number,
-		balance?: number
-	) => {
-		try {
-			await fetch('http://localhost:3000/api/user/updateInfo', {
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				credentials: 'include',
-				body: JSON.stringify({ wins, loses, balance }),
-			})
-		} catch (error) {
-			console.error(error)
-		}
-	}
+
 	const flipCoinHandler = () => {
 		const decreasedBalance = userBalance - userBet
 		if (userBet >= 1) {

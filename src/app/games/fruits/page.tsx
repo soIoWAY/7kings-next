@@ -1,6 +1,7 @@
 'use client'
 import BetPanel from '@/components/GamesList/BetPanel'
 import { userStore } from '@/store/user'
+import { updateUserInfo } from '@/utils/userUpdate'
 import { useEffect, useState } from 'react'
 
 export default function FruitsPage() {
@@ -16,24 +17,6 @@ export default function FruitsPage() {
 	const fruits = ['🍒', '🍏', '🍋', '🍌', '🍇', '💣']
 	const randomFruit = () => {
 		return Math.floor(Math.random() * fruits.length)
-	}
-	const updateUserInfo = async (
-		wins?: number,
-		loses?: number,
-		balance?: number
-	) => {
-		try {
-			await fetch('http://localhost:3000/api/user/updateInfo', {
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				credentials: 'include',
-				body: JSON.stringify({ wins, loses, balance }),
-			})
-		} catch (error) {
-			console.error(error)
-		}
 	}
 	const updateFruitsHandler = () => {
 		const delay = 180
