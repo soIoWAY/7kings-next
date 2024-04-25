@@ -45,9 +45,12 @@ const Header = () => {
 				</Link>
 			</div>
 			<div className='wallet flex gap-2 items-center'>
-				<div className='bg-black rounded-md text-white py-1 md:py-2 px-2 md:px-4'>
+				<Link
+					href='/wallet'
+					className='bg-black rounded-md text-white py-1 md:py-2 px-2 md:px-4'
+				>
 					${userBalance ? <span>{userBalance}</span> : <span>0</span>}
-				</div>
+				</Link>
 				<Link
 					href='/wallet'
 					className='border-2 border-green-400 bg-green-800 text-white rounded-md py-1 px-4 hidden md:block'
