@@ -4,7 +4,7 @@ const updateUserInfo = async (
 	balance?: number
 ) => {
 	try {
-		await fetch('http://localhost:3000/api/user/updateInfo', {
+		await fetch('https://7kings.vercel.app/api/user/updateInfo', {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
