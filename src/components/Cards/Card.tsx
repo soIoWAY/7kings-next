@@ -26,12 +26,14 @@ const Card = ({
 		>
 			<div className='flex flex-col'>
 				<h1
-					className={`${h1Color} text-3xl lg:text-2xl uppercase font-semibold`}
+					className={`${h1Color} text-xl lg:text-2xl uppercase font-semibold`}
 				>
 					{h1Text}
 				</h1>
-				<h2 className='text-white text-2xl uppercase font-medium'>{h2Text}</h2>
-				<span className='font-normal text-normal lg:text-sm text-gray-400 pb-9 md:pb-0 '>
+				<h2 className='text-white text-xl lg:text-2xl uppercase font-medium'>
+					{h2Text}
+				</h2>
+				<span className='font-normal text-xs lg:text-sm text-gray-400 pb-9 md:pb-0 '>
 					{description}
 				</span>
 				<div className='absolute bottom-4'>
