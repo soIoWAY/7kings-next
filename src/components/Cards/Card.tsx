@@ -39,7 +39,7 @@ const Card = ({
 				<div className='absolute bottom-4'>
 					<Link
 						href='/referrals'
-						className='text-white bg-white bg-opacity-30 rounded-full w-10 h-10 lg:w-8 lg:h-8 mt-5 flex items-center justify-center'
+						className='text-white bg-white bg-opacity-30 rounded-full w-8 h-8 mt-5 flex items-center justify-center'
 					>
 						<IoIosArrowForward />
 					</Link>

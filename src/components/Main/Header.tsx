@@ -1,7 +1,7 @@
 'use client'
 import { userStore } from '@/store/user'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AiOutlineStock } from 'react-icons/ai'
 import { BsCoin } from 'react-icons/bs'
 import { FaDice, FaDiscord } from 'react-icons/fa'
@@ -11,22 +11,13 @@ import { MdContactSupport } from 'react-icons/md'
 import { PiNumberSquareSevenFill, PiSwordBold } from 'react-icons/pi'
 import { RxHamburgerMenu } from 'react-icons/rx'
 const Header = () => {
-	const [username, setUsername] = useState('')
 	const [isAsideOpen, setIsAsideOpen] = useState(false)
 	const userBalance = userStore((state: any) => state.balance)
+	const username = userStore((state: any) => state.username)
 	const liStyle =
 		'flex items-center text-xl gap-3 hover:text-green-400 transition-all tracking-widest'
 	const linkStyle = 'hover:text-white transition-all flex-1'
-	const getInfoHandler = async () => {
-		const response = await fetch('/api/user/info', { credentials: 'include' })
-		const data = await response.json()
-		if (data) {
-			setUsername(data.username)
-		}
-	}
-	useEffect(() => {
-		getInfoHandler()
-	}, [])
+
 	return (
 		<div className='flex justify-between'>
 			<div className='flex gap-3 md:gap-6 items-center'>
