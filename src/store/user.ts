@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 export const userStore = create(async set => {
-	const response = await fetch('http://localhost:3000/api/user/info', {
+	const response = await fetch('https://7kings.vercel.app/api/user/info', {
 		credentials: 'include',
 	})
 	const data = await response.json()
