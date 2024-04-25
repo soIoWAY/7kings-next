@@ -18,7 +18,6 @@ const BetPanel = ({
 }: BetPanel) => {
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
-	const [userProfit, setUserProfit] = useState<number>(userBet * 2)
 	const betChooseButtons =
 		'text-white py-2 w-1/2 hover:bg-zinc-700 transition-all'
 	const [isManual, setIsManual] = useState(true)
@@ -94,7 +93,8 @@ const BetPanel = ({
 					<input
 						type='text'
 						className='rounded border border-[#565656] outline-none mt-1 bg-zinc-800 py-1 px-2 w-full caret-transparent text-white font-semibold text-lg'
-						defaultValue={userProfit}
+						value={userBet * 2 || 0}
+						disabled
 					/>
 				</div>
 			</div>
