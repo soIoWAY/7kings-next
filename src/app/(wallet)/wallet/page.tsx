@@ -1,12 +1,13 @@
 'use client'
 import { userStore } from '@/store/user'
+import { updateUserInfo } from '@/utils/userUpdate'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { CiLock } from 'react-icons/ci'
 import * as Yup from 'yup'
 export default function WalletPage() {
 	const inputStyle =
-		'outline-none bg-transparent border-green-500 border rounded-md py-2 px-2'
+		'outline-none bg-transparent border-green-500 border rounded-md py-2 px-2 w-full'
 	const userBalance = userStore((state: any) => state.balance)
 	const navigate = useRouter()
 	const DepositSchema = Yup.object().shape({
@@ -18,24 +19,7 @@ export default function WalletPage() {
 		cvv: Yup.string().required(),
 		sum: Yup.number().required(),
 	})
-	const updateUserInfo = async (
-		wins?: number,
-		loses?: number,
-		balance?: number
-	) => {
-		try {
-			await fetch('http://localhost:3000/api/user/updateInfo', {
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				credentials: 'include',
-				body: JSON.stringify({ wins, loses, balance }),
-			})
-		} catch (error) {
-			console.error(error)
-		}
-	}
+
 	const sendFormHandler = async (values: {
 		cardNumber: string
 		exData: string
@@ -48,7 +32,7 @@ export default function WalletPage() {
 		navigate.push('/')
 	}
 	return (
-		<div className='bg-[#1a1a1a] w-2/6 px-8 py-6 rounded-md m-auto mt-24 text-white flex flex-col gap-3'>
+		<div className='bg-[#1a1a1a] w-full sm:4/6 md:w-3/6 lg:2/6 px-8 py-6 rounded-md m-auto mt-24 text-white flex flex-col gap-3'>
 			<div>
 				<h1 className=' font-bold text-xl tracking-wide'>Payment Method</h1>
 				<p className=' text-sm mt-1'>
@@ -63,7 +47,7 @@ export default function WalletPage() {
 				onSubmit={sendFormHandler}
 			>
 				<Form className='w-full flex flex-col gap-3'>
-					<div className='flex flex-col gap-1'>
+					<div className='flex flex-col gap-1 w-full'>
 						<label htmlFor='cardNumber' className='font-semibold'>
 							Card number
 						</label>

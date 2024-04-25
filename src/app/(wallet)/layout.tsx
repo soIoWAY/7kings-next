@@ -11,7 +11,7 @@ export default function WalletLayout({ children }: IWalletLayout) {
 			<aside className='w-[13%] fixed'>
 				<Aside />
 			</aside>
-			<div className='flex-1 py-6 px-5 ml-[13%]'>
+			<div className='flex-1 py-6 px-5 lg:ml-[13%]'>
 				<header>
 					<Header />
 				</header>
