@@ -1,8 +1,8 @@
 'use client'
-import BetPanel from '@/components/GamesList/BetPanel'
+import BetPanel from '@/components/BetPanel/BetPanel'
 import { userStore } from '@/store/user'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { updateUserInfo } from '@/utils/userUpdate'
 import styles from './CoinPage.module.css'
@@ -19,8 +19,6 @@ const CoinPage = () => {
 		const decreasedBalance = userBalance - userBet
 		if (userBet >= 1) {
 			if (decreasedBalance > 0) {
-				userStore.setState({ balance: decreasedBalance })
-				updateUserInfo(undefined, undefined, decreasedBalance)
 				setIsCoinFlipping(true)
 				setDisabledBetButton(true)
 				const randomResult = Math.round(Math.random())
@@ -28,16 +26,6 @@ const CoinPage = () => {
 				setTimeout(() => {
 					setIsCoinFlipping(false)
 					setDisabledBetButton(false)
-					if (randomResult === 0) {
-						const increasedBalance = userBalance + userBet
-						const newWins = userWins + 1
-						userStore.setState({ wins: newWins, balance: increasedBalance })
-						updateUserInfo(newWins, undefined, increasedBalance)
-					} else {
-						const newLoses = userLoses + 1
-						userStore.setState({ loses: userLoses + 1 })
-						updateUserInfo(undefined, newLoses)
-					}
 				}, 2000)
 			} else {
 				alert('Недостатньо грошей на балансі')
@@ -46,6 +34,25 @@ const CoinPage = () => {
 			alert('Сума ставки повинна бути більшою за 1')
 		}
 	}
+
+	useEffect(() => {
+		if (!isCoinFlipping) {
+			if (result === 0) {
+				const increasedBalance = userBalance + userBet
+				const newWins = userWins + 1
+				userStore.setState({ wins: newWins, balance: increasedBalance })
+				updateUserInfo(newWins, undefined, increasedBalance)
+			} else {
+				const decreasedBalance = userBalance - userBet
+				userStore.setState({ balance: decreasedBalance })
+				updateUserInfo(undefined, undefined, decreasedBalance)
+				const newLoses = userLoses + 1
+				userStore.setState({ loses: userLoses + 1 })
+				updateUserInfo(undefined, newLoses)
+			}
+		}
+	}, [result, isCoinFlipping])
+
 	return (
 		<div className='bg-[#1a1a1a] m-auto mt-9 sm:mt-24 border border-[#565656] rounded-lg w-full md:w-10/12 flex flex-col sm:flex-row items-center'>
 			<BetPanel
@@ -53,6 +60,8 @@ const CoinPage = () => {
 				disabledBetButton={disabledBetButton}
 				setUserBet={setUserBet}
 				userBet={userBet}
+				interval={2000}
+				disabledAuto={true}
 			/>
 
 			<div className='w-full sm:w-9/12 flex flex-col items-center justify-center mt-2 sm:mt-0'>

@@ -98,6 +98,7 @@ export default function LoginPage() {
 							href='/auth/register'
 							className='text-green-400 font-bold tracking-tight'
 						>
+							{' '}
 							REGISTRATION
 						</Link>
 					</span>

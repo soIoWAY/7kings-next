@@ -38,9 +38,10 @@ const Header = () => {
 			<div className='wallet flex gap-2 items-center'>
 				<Link
 					href='/wallet'
-					className='bg-black rounded-md text-white py-1 md:py-2 px-2 md:px-4'
+					className='bg-black rounded-md text-white py-1 md:py-2 px-2 md:px-4 text-center'
 				>
-					${userBalance ? <span>{userBalance}</span> : <span>0</span>}
+					$
+					{userBalance ? <span>{userBalance.toFixed(2)}</span> : <span>0</span>}
 				</Link>
 				<Link
 					href='/wallet'

@@ -1,5 +1,5 @@
 'use client'
-import BetPanel from '@/components/GamesList/BetPanel'
+import BetPanel from '@/components/BetPanel/BetPanel'
 import { userStore } from '@/store/user'
 import { updateUserInfo } from '@/utils/userUpdate'
 import { useEffect, useState } from 'react'
@@ -23,8 +23,6 @@ export default function FruitsPage() {
 		const decreasedBalance = userBalance - userBet
 		if (userBet >= 1) {
 			if (decreasedBalance > 1) {
-				userStore.setState({ balance: decreasedBalance })
-				updateUserInfo(undefined, undefined, decreasedBalance)
 				setIsAnimatingCompleted(false)
 				if (decreasedBalance > 0) {
 					setDisabledBetButton(true)
@@ -62,6 +60,9 @@ export default function FruitsPage() {
 				updateUserInfo(newWins, undefined, increasedBalance)
 				userStore.setState({ wins: newWins, balance: increasedBalance })
 			} else {
+				const decreasedBalance = userBalance - userBet
+				userStore.setState({ balance: decreasedBalance })
+				updateUserInfo(undefined, undefined, decreasedBalance)
 				const newLoses = userLoses + 1
 				userStore.setState({ loses: userLoses + 1 })
 				updateUserInfo(undefined, newLoses)
@@ -88,6 +89,8 @@ export default function FruitsPage() {
 				disabledBetButton={disabledBetButton}
 				setUserBet={setUserBet}
 				userBet={userBet}
+				interval={1550}
+				disabledAuto={false}
 			/>
 		</div>
 	)

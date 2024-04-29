@@ -26,10 +26,14 @@ export default function WalletPage() {
 		cvv: string
 		sum: number
 	}) => {
-		const newBalance = userBalance + values.sum
-		userStore.setState({ balance: newBalance })
-		updateUserInfo(undefined, undefined, newBalance)
-		navigate.push('/')
+		if (values.sum > 1000) {
+			alert('Max deposit sum is 1000')
+		} else {
+			const newBalance = userBalance + values.sum
+			userStore.setState({ balance: newBalance })
+			updateUserInfo(undefined, undefined, newBalance)
+			navigate.push('/')
+		}
 	}
 	return (
 		<div className='bg-[#1a1a1a] w-full sm:4/6 md:w-3/6 lg:2/6 px-8 py-6 rounded-md m-auto mt-24 text-white flex flex-col gap-3'>

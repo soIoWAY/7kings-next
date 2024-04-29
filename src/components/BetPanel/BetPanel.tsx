@@ -1,5 +1,5 @@
 import { userStore } from '@/store/user'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 //@ts-ignore
 import useSound from 'use-sound'
 
@@ -8,6 +8,8 @@ interface BetPanel {
 	disabledBetButton: boolean
 	setUserBet: (value: number) => void
 	userBet: number
+	interval: number
+	disabledAuto: boolean
 }
 
 const BetPanel = ({
@@ -15,17 +17,55 @@ const BetPanel = ({
 	disabledBetButton,
 	setUserBet,
 	userBet,
+	interval,
+	disabledAuto,
 }: BetPanel) => {
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
 	const betChooseButtons =
 		'text-white py-2 w-1/2 hover:bg-zinc-700 transition-all'
 	const [isManual, setIsManual] = useState(true)
+	const [autoEnabled, setAutoEnabled] = useState(false)
 	const [butClick] = useSound('/butClick.mp3', { volume: 0.55 })
+	const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null)
 	const betPanelStartManualHandler = () => {
 		butClick()
 		updateHandler()
 	}
+
+	const startAutoHandler = () => {
+		if (!intervalId) {
+			const newIntervalId = setInterval(() => {
+				butClick()
+				updateHandler()
+			}, interval)
+			setIntervalId(newIntervalId)
+			setAutoEnabled(true)
+		}
+	}
+
+	const stopAutoHandler = () => {
+		if (intervalId) {
+			clearInterval(intervalId)
+			setIntervalId(null)
+			setAutoEnabled(false)
+		}
+	}
+
+	const toggleAutoHandler = () => {
+		if (autoEnabled) {
+			stopAutoHandler()
+		} else {
+			startAutoHandler()
+		}
+	}
+
+	useEffect(() => {
+		return () => {
+			stopAutoHandler()
+		}
+	}, [])
+
 	return (
 		<div className='w-full md:w-3/12 sm:border-r border-[#565656] p-2 md:p-5 order-1 sm:-order-1'>
 			<div className='flex justify-between mb-2 text-white border-b border-zinc-600'>
@@ -41,6 +81,7 @@ const BetPanel = ({
 					className={`${betChooseButtons} rounded-l-md ${
 						isManual ? 'bg-zinc-700' : 'bg-zinc-600'
 					}`}
+					onClick={() => setIsManual(true)}
 				>
 					Manual
 				</button>
@@ -48,18 +89,29 @@ const BetPanel = ({
 					className={`${betChooseButtons} rounded-r-md ${
 						!isManual ? 'bg-zinc-700' : 'bg-zinc-600'
 					}`}
+					onClick={() => setIsManual(false)}
 				>
 					Auto
 				</button>
 			</div>
 			<div>
-				<button
-					className='bg-green-400 w-full text-black mt-4 rounded-md py-2 font-bold hover:bg-green-500 transition-all text-center cursor-pointer'
-					onClick={betPanelStartManualHandler}
-					disabled={disabledBetButton}
-				>
-					BET
-				</button>
+				{isManual ? (
+					<button
+						className='bg-green-400 w-full text-black mt-4 rounded-md py-2 font-bold hover:bg-green-500 transition-all text-center cursor-pointer'
+						onClick={betPanelStartManualHandler}
+						disabled={disabledBetButton}
+					>
+						BET
+					</button>
+				) : (
+					<button
+						className='bg-green-400 w-full text-black mt-4 rounded-md py-2 font-bold hover:bg-green-500 transition-all text-center cursor-pointer'
+						disabled={disabledBetButton || disabledAuto}
+						onClick={toggleAutoHandler}
+					>
+						{autoEnabled ? 'STOP' : 'START'}
+					</button>
+				)}
 				<div className='mt-3'>
 					<label className='text-sm font-semibold'>Bet Amount</label>
 					<input
