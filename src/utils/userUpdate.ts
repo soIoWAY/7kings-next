@@ -1,7 +1,8 @@
 const updateUserInfo = async (
 	wins?: number,
 	loses?: number,
-	balance?: number
+	balance?: number,
+	level?: number
 ) => {
 	try {
 		await fetch('https://7kings.vercel.app/api/user/updateInfo', {
@@ -10,7 +11,7 @@ const updateUserInfo = async (
 				'Content-Type': 'application/json',
 			},
 			credentials: 'include',
-			body: JSON.stringify({ wins, loses, balance }),
+			body: JSON.stringify({ wins, loses, balance, level }),
 		})
 	} catch (error) {
 		console.error(error)

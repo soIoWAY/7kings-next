@@ -23,14 +23,16 @@ export async function GET(req: NextRequest) {
 					balance: true,
 					wins: true,
 					loses: true,
+					level: true,
 				},
 			})
 		}
 		const balance = user?.balance ?? 0
 		const wins = user?.wins ?? 0
 		const loses = user?.loses ?? 0
+		const level = user?.level ?? 0
 		return NextResponse.json(
-			{ balance, username, wins, loses },
+			{ balance, username, wins, loses, level },
 			{ status: 200 }
 		)
 	} catch (error) {

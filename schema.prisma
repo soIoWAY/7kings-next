@@ -17,5 +17,5 @@ model User {
   role           String   @default("user")
   createdAt      DateTime @default(now())
   updateAt       DateTime @updatedAt
-  lvl            Int      @default(1)
+  level          Int      @default(1)
 }

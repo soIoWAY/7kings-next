@@ -52,20 +52,20 @@ export default function FruitsPage() {
 			if (fruits[0] === fruits[1] && fruits[1] === fruits[2]) {
 				const newWins = userWins + 1
 				const increasedBalance = userBalance + userBet * 5
-				updateUserInfo(newWins, undefined, increasedBalance)
+				updateUserInfo(newWins, undefined, increasedBalance, undefined)
 				userStore.setState({ wins: newWins, balance: increasedBalance })
 			} else if (fruits[0] === fruits[1] || fruits[1] === fruits[2]) {
 				const newWins = userWins + 1
 				const increasedBalance = userBalance + userBet * 2
-				updateUserInfo(newWins, undefined, increasedBalance)
+				updateUserInfo(newWins, undefined, increasedBalance, undefined)
 				userStore.setState({ wins: newWins, balance: increasedBalance })
 			} else {
 				const decreasedBalance = userBalance - userBet
 				userStore.setState({ balance: decreasedBalance })
-				updateUserInfo(undefined, undefined, decreasedBalance)
+				updateUserInfo(undefined, undefined, decreasedBalance, undefined)
 				const newLoses = userLoses + 1
 				userStore.setState({ loses: userLoses + 1 })
-				updateUserInfo(undefined, newLoses)
+				updateUserInfo(undefined, newLoses, undefined, undefined)
 			}
 		}
 	}, [fruit1, fruit2, fruit3, isAnimatingCompleted])
