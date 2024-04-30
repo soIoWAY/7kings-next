@@ -2,7 +2,7 @@ import { create } from 'zustand'
 export const userStore = create(async set => {
 	// http://localhost:3000
 	// https://7kings.vercel.app
-	const url = 'http://localhost:3000'
+	const url = 'https://7kings.vercel.app'
 	const response = await fetch(`${url}/api/user/info`, {
 		credentials: 'include',
 	})
