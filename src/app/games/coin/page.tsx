@@ -4,21 +4,25 @@ import { userStore } from '@/store/user'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-import { updateUserInfo } from '@/utils/userUpdate'
+import { coinChecker } from '@/utils/coin/coin'
 import styles from './CoinPage.module.css'
 const CoinPage = () => {
 	const [isCoinFlipping, setIsCoinFlipping] = useState(false)
+	const [isAnimatingCompleted, setIsAnimatingCompleted] = useState(false)
 	const [result, setResult] = useState<number | null>(null)
 	const [disabledBetButton, setDisabledBetButton] = useState(false)
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
 	const userBalance = userStore((state: any) => state.balance)
+	const userLevel = userStore((state: any) => state.level)
+
 	const [userBet, setUserBet] = useState<number>(1)
 
 	const flipCoinHandler = () => {
 		const decreasedBalance = userBalance - userBet
-		if (userBet >= 1) {
+		if (userBet > 0) {
 			if (decreasedBalance > 0) {
+				setIsAnimatingCompleted(false)
 				setIsCoinFlipping(true)
 				setDisabledBetButton(true)
 				const randomResult = Math.round(Math.random())
@@ -26,6 +30,7 @@ const CoinPage = () => {
 				setTimeout(() => {
 					setIsCoinFlipping(false)
 					setDisabledBetButton(false)
+					setIsAnimatingCompleted(true)
 				}, 2000)
 			} else {
 				alert('Недостатньо грошей на балансі')
@@ -36,22 +41,10 @@ const CoinPage = () => {
 	}
 
 	useEffect(() => {
-		if (!isCoinFlipping) {
-			if (result === 0) {
-				const increasedBalance = userBalance + userBet
-				const newWins = userWins + 1
-				userStore.setState({ wins: newWins, balance: increasedBalance })
-				updateUserInfo(newWins, undefined, increasedBalance)
-			} else {
-				const decreasedBalance = userBalance - userBet
-				userStore.setState({ balance: decreasedBalance })
-				updateUserInfo(undefined, undefined, decreasedBalance)
-				const newLoses = userLoses + 1
-				userStore.setState({ loses: userLoses + 1 })
-				updateUserInfo(undefined, newLoses)
-			}
+		if (isAnimatingCompleted) {
+			coinChecker(result, userBalance, userBet, userWins, userLoses, userLevel)
 		}
-	}, [result, isCoinFlipping])
+	}, [result, isAnimatingCompleted])
 
 	return (
 		<div className='bg-[#1a1a1a] m-auto mt-9 sm:mt-24 border border-[#565656] rounded-lg w-full md:w-10/12 flex flex-col sm:flex-row items-center'>

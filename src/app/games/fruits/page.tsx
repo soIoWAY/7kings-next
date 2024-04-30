@@ -1,7 +1,7 @@
 'use client'
 import BetPanel from '@/components/BetPanel/BetPanel'
 import { userStore } from '@/store/user'
-import { updateUserInfo } from '@/utils/userUpdate'
+import { fruitsChecker } from '@/utils/fruitsSlot/fruitsSlots'
 import { useEffect, useState } from 'react'
 
 export default function FruitsPage() {
@@ -12,8 +12,10 @@ export default function FruitsPage() {
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
 	const userBalance = userStore((state: any) => state.balance)
+	const userLevel = userStore((state: any) => state.level)
 	const [isAnimatingCompleted, setIsAnimatingCompleted] = useState(false)
 	const [userBet, setUserBet] = useState<number>(1)
+
 	const fruits = ['🍒', '🍏', '🍋', '🍌', '🍇', '💣']
 	const randomFruit = () => {
 		return Math.floor(Math.random() * fruits.length)
@@ -22,7 +24,7 @@ export default function FruitsPage() {
 		const delay = 180
 		const decreasedBalance = userBalance - userBet
 		if (userBet >= 1) {
-			if (decreasedBalance > 1) {
+			if (decreasedBalance > 0) {
 				setIsAnimatingCompleted(false)
 				if (decreasedBalance > 0) {
 					setDisabledBetButton(true)
@@ -38,7 +40,7 @@ export default function FruitsPage() {
 						setIsAnimatingCompleted(true)
 					}, delay * 3)
 				} else {
-					alert('недостатньо грошей на балансі')
+					alert('Недостатньо грошей на балансі')
 				}
 			}
 		} else {
@@ -49,24 +51,14 @@ export default function FruitsPage() {
 	useEffect(() => {
 		if (isAnimatingCompleted) {
 			const fruits = [fruit1, fruit2, fruit3]
-			if (fruits[0] === fruits[1] && fruits[1] === fruits[2]) {
-				const newWins = userWins + 1
-				const increasedBalance = userBalance + userBet * 5
-				updateUserInfo(newWins, undefined, increasedBalance, undefined)
-				userStore.setState({ wins: newWins, balance: increasedBalance })
-			} else if (fruits[0] === fruits[1] || fruits[1] === fruits[2]) {
-				const newWins = userWins + 1
-				const increasedBalance = userBalance + userBet * 2
-				updateUserInfo(newWins, undefined, increasedBalance, undefined)
-				userStore.setState({ wins: newWins, balance: increasedBalance })
-			} else {
-				const decreasedBalance = userBalance - userBet
-				userStore.setState({ balance: decreasedBalance })
-				updateUserInfo(undefined, undefined, decreasedBalance, undefined)
-				const newLoses = userLoses + 1
-				userStore.setState({ loses: userLoses + 1 })
-				updateUserInfo(undefined, newLoses, undefined, undefined)
-			}
+			fruitsChecker(
+				fruits,
+				userBalance,
+				userBet,
+				userLevel,
+				userWins,
+				userLoses
+			)
 		}
 	}, [fruit1, fruit2, fruit3, isAnimatingCompleted])
 	return (

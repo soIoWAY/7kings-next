@@ -76,7 +76,7 @@ const Ranks = () => {
 					</div>
 					<div className='bg-yellow-400 rounded-lg bg-opacity-20 px-2 mt-1'>
 						<span className='bg-gradient-to-r from-yellow-300 to-amber-500 bg-clip-text text-transparent'>
-							Lvl {userLevel + 1}
+							Lvl {userLevel + 1 || 0}
 						</span>
 					</div>
 				</div>
