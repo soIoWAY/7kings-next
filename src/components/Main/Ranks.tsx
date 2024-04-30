@@ -23,10 +23,7 @@ const Ranks = () => {
 	}
 
 	useEffect(() => {
-		if (userWins < 25) {
-			setLevel(1)
-			setWinsToNextLevel(25 - userWins)
-		} else if (userWins >= 25 && userWins < 50) {
+		if (userWins >= 25 && userWins < 50) {
 			setLevel(2)
 			setWinsToNextLevel(50 - userWins)
 		} else if (userWins >= 50 && userWins < 100) {
