@@ -31,7 +31,7 @@ const CoinPage = () => {
 					setIsCoinFlipping(false)
 					setDisabledBetButton(false)
 					setIsAnimatingCompleted(true)
-				}, 2000)
+				}, 20)
 			} else {
 				alert('Недостатньо грошей на балансі')
 			}

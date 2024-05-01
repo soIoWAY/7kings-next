@@ -2,7 +2,7 @@ import { userStore } from '@/store/user'
 import { lvlWinMultipliers } from '../fruitsSlot/fruitsSlots'
 import { updateUserInfo } from '../userUpdate'
 
-const coinChecker = (
+const coinChecker: any = (
 	result: number | null,
 	userBalance: number,
 	userBet: number,

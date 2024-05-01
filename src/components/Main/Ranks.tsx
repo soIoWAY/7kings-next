@@ -26,20 +26,20 @@ const Ranks = () => {
 
 	const updateUserLvl = () => {
 		userStore.setState({ level: userLevel + 1 })
-		updateUserInfo(userLevel + 1)
+		updateUserInfo(undefined, undefined, undefined, userLevel + 1)
 	}
 
 	// utils
 	useEffect(() => {
 		if (userWins <= 25) {
 			setWinsToNextLevel(25 - userWins)
-		} else if (userWins >= 25 && userWins < 50) {
+		} else if (userWins >= 25) {
 			updateUserLvl()
 			setWinsToNextLevel(50 - userWins)
-		} else if (userWins >= 50 && userWins < 100) {
+		} else if (userWins >= 50) {
 			updateUserLvl()
 			setWinsToNextLevel(100 - userWins)
-		} else if (userWins >= 100 && userWins < 250) {
+		} else if (userWins >= 100) {
 			updateUserLvl()
 			setWinsToNextLevel(250 - userWins)
 		} else if (userWins >= 250) {
