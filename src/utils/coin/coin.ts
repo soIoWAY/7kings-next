@@ -15,14 +15,12 @@ const coinChecker = (
 		const increasedBalance = userBalance + userBet * multiplier
 		const newWins = userWins + 1
 		userStore.setState({ wins: newWins, balance: increasedBalance })
-		updateUserInfo(newWins, undefined, increasedBalance)
+		updateUserInfo(newWins, undefined, increasedBalance, undefined)
 	} else {
 		const decreasedBalance = userBalance - userBet
-		userStore.setState({ balance: decreasedBalance })
-		updateUserInfo(undefined, undefined, decreasedBalance)
 		const newLoses = userLoses + 1
-		userStore.setState({ loses: userLoses + 1 })
-		updateUserInfo(undefined, newLoses)
+		userStore.setState({ balance: decreasedBalance, loses: newLoses })
+		updateUserInfo(undefined, newLoses, decreasedBalance, undefined)
 	}
 }
 

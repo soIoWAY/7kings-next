@@ -29,11 +29,9 @@ const fruitsChecker = (
 		userStore.setState({ wins: newWins, balance: increasedBalance })
 	} else {
 		const decreasedBalance = userBalance - userBet
-		userStore.setState({ balance: decreasedBalance })
-		updateUserInfo(undefined, undefined, decreasedBalance, undefined)
 		const newLoses = userLoses + 1
-		userStore.setState({ loses: userLoses + 1 })
-		updateUserInfo(undefined, newLoses, undefined, undefined)
+		userStore.setState({ balance: decreasedBalance, loses: newLoses })
+		updateUserInfo(undefined, newLoses, decreasedBalance, undefined)
 	}
 }
 
