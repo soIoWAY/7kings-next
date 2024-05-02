@@ -5,12 +5,13 @@ interface UpdateData {
 	wins?: number
 	loses?: number
 	balance?: number
+	level?: number
 }
 
 export async function PATCH(req: NextRequest) {
 	const dataPromise = req.json()
 	const data = await dataPromise
-	const { wins, loses, balance } = data
+	const { wins, loses, balance, level } = data
 	const userCookieObject = req.cookies.get('user')
 	const userCookie = userCookieObject ? userCookieObject.value : null
 	let username = null
@@ -31,6 +32,9 @@ export async function PATCH(req: NextRequest) {
 			}
 			if (balance !== undefined) {
 				updateData.balance = balance
+			}
+			if (level !== undefined) {
+				updateData.level = level
 			}
 
 			await prisma.user.update({

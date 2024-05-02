@@ -9,44 +9,32 @@ const Ranks = () => {
 	const username = userStore((state: any) => state.username)
 	const userLevel = userStore((state: any) => state.level)
 
-	// utils
-	const winsNeededForNextLevel = () => {
-		if (userLevel === 1) {
+	useEffect(() => {
+		const levelUp = () => {
+			const neededWins = winsNeededForNextLevel(userLevel)
+			if (userWins >= neededWins) {
+				const newLevel = userLevel + 1
+				userStore.setState({ level: newLevel })
+				updateUserInfo(undefined, undefined, undefined, newLevel)
+			}
+		}
+		levelUp()
+		setWinsToNextLevel(winsNeededForNextLevel(userLevel) - userWins)
+	}, [userLevel, userWins])
+
+	const winsNeededForNextLevel = (level: number) => {
+		if (level === 1) {
 			return 25
-		} else if (userLevel === 2) {
+		} else if (level === 2) {
 			return 50
-		} else if (userLevel === 3) {
+		} else if (level === 3) {
 			return 100
-		} else if (userLevel === 4) {
+		} else if (level === 4) {
 			return 250
 		} else {
 			return 0
 		}
 	}
-
-	const updateUserLvl = () => {
-		userStore.setState({ level: userLevel + 1 })
-		updateUserInfo(undefined, undefined, undefined, userLevel + 1)
-	}
-
-	// utils
-	useEffect(() => {
-		if (userWins <= 25) {
-			setWinsToNextLevel(25 - userWins)
-		} else if (userWins >= 25) {
-			updateUserLvl()
-			setWinsToNextLevel(50 - userWins)
-		} else if (userWins >= 50) {
-			updateUserLvl()
-			setWinsToNextLevel(100 - userWins)
-		} else if (userWins >= 100) {
-			updateUserLvl()
-			setWinsToNextLevel(250 - userWins)
-		} else if (userWins >= 250) {
-			updateUserLvl()
-			setWinsToNextLevel(0)
-		}
-	}, [userWins])
 
 	return (
 		<div className='mt-8 bg-[#162A24] rounded-md flex flex-col gap-6 md:flex-row justify-between md:items-center py-6 px-4 lg:py-8 lg:px-6'>
@@ -83,7 +71,9 @@ const Ranks = () => {
 				<div className='h-1 block w-full lg:w-96 bg-yellow-400 bg-opacity-20 rounded-lg overflow-hidden'>
 					<div
 						className='h-full bg-yellow-500'
-						style={{ width: `${(userWins / winsNeededForNextLevel()) * 100}%` }}
+						style={{
+							width: `${(userWins / winsNeededForNextLevel(userLevel)) * 100}%`,
+						}}
 					></div>
 				</div>
 			</div>
