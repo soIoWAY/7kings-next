@@ -52,12 +52,12 @@ const Header = () => {
 			</div>
 			<div className='profile flex items-center text-green-400'>
 				{username ? (
-					<div className='flex items-center gap-2 text-3xl'>
+					<Link href='/dashboard' className='flex items-center gap-2 text-3xl'>
 						<span className='text-white text-base tracking-wide underline decoration-green-400'>
 							{username}
 						</span>
 						<PiSwordBold />
-					</div>
+					</Link>
 				) : (
 					<Link
 						href='/auth/login'
