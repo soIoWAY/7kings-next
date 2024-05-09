@@ -1,6 +1,7 @@
 'use client'
 import { userStore } from '@/store/user'
 import { updateUserInfo } from '@/utils/userUpdate'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { MdShield } from 'react-icons/md'
 const Ranks = () => {
@@ -78,9 +79,12 @@ const Ranks = () => {
 				</div>
 			</div>
 			<div className=''>
-				<button className='border-2 border-green-400 bg-green-800 text-white rounded-md py-2 px-4 w-full'>
+				<Link
+					href='/dashboard'
+					className='border-2 border-green-400 bg-green-800 text-white rounded-md py-2 px-4 w-full'
+				>
 					Stats
-				</button>
+				</Link>
 			</div>
 		</div>
 	)
