@@ -17,6 +17,7 @@ const fruitsChecker = (
 	userLoses: number
 ) => {
 	const multiplier = lvlWinMultipliers[userLevel] || 1
+	// const decreasedBalance = userBalance - userBet
 	if (fruits[0] === fruits[1] && fruits[1] === fruits[2]) {
 		const increasedBalance = userBalance + userBet * 5 * multiplier
 		const newWins = userWins + 1
@@ -28,10 +29,9 @@ const fruitsChecker = (
 		updateUserInfo(newWins, undefined, increasedBalance, undefined)
 		userStore.setState({ wins: newWins, balance: increasedBalance })
 	} else {
-		const decreasedBalance = userBalance - userBet
 		const newLoses = userLoses + 1
-		userStore.setState({ balance: decreasedBalance, loses: newLoses })
-		updateUserInfo(undefined, newLoses, decreasedBalance, undefined)
+		userStore.setState({ loses: newLoses })
+		updateUserInfo(undefined, newLoses, undefined, undefined)
 	}
 }
 

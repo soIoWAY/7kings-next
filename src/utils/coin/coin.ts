@@ -11,16 +11,16 @@ const coinChecker: any = (
 	userLevel: number
 ) => {
 	const multiplier = lvlWinMultipliers[userLevel] || 1
+	// const decreasedBalance = userBalance - userBet
 	if (result === 0) {
-		const increasedBalance = userBalance + userBet * multiplier
+		const increasedBalance = userBalance + userBet * 2 * multiplier
 		const newWins = userWins + 1
 		userStore.setState({ wins: newWins, balance: increasedBalance })
 		updateUserInfo(newWins, undefined, increasedBalance, undefined)
 	} else {
-		const decreasedBalance = userBalance - userBet
 		const newLoses = userLoses + 1
-		userStore.setState({ balance: decreasedBalance, loses: newLoses })
-		updateUserInfo(undefined, newLoses, decreasedBalance, undefined)
+		userStore.setState({ loses: newLoses })
+		updateUserInfo(undefined, newLoses, undefined, undefined)
 	}
 }
 

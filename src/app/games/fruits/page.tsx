@@ -2,6 +2,7 @@
 import BetPanel from '@/components/BetPanel/BetPanel'
 import { userStore } from '@/store/user'
 import { fruitsChecker } from '@/utils/fruitsSlot/fruitsSlots'
+import { updateUserInfo } from '@/utils/userUpdate'
 import { useEffect, useState } from 'react'
 
 export default function FruitsPage() {
@@ -23,6 +24,8 @@ export default function FruitsPage() {
 	const updateFruitsHandler = () => {
 		const delay = 180
 		const decreasedBalance = userBalance - userBet
+		userStore.setState({ balance: decreasedBalance })
+		updateUserInfo(undefined, undefined, decreasedBalance, undefined)
 		if (userBet >= 1) {
 			if (decreasedBalance > 0) {
 				setIsAnimatingCompleted(false)

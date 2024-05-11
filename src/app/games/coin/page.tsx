@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 import { coinChecker } from '@/utils/coin/coin'
+import { updateUserInfo } from '@/utils/userUpdate'
 import styles from './CoinPage.module.css'
 const CoinPage = () => {
 	const [isCoinFlipping, setIsCoinFlipping] = useState(false)
@@ -20,8 +21,10 @@ const CoinPage = () => {
 
 	const flipCoinHandler = () => {
 		const decreasedBalance = userBalance - userBet
+		updateUserInfo(undefined, undefined, decreasedBalance, undefined)
 		if (userBet > 0) {
 			if (decreasedBalance > 0) {
+				userStore.setState({ balance: decreasedBalance })
 				setIsAnimatingCompleted(false)
 				setIsCoinFlipping(true)
 				setDisabledBetButton(true)
