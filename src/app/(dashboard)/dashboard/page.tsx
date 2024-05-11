@@ -8,6 +8,8 @@ export default function DashboardPage() {
 	// only 2 or 3 lvl can create promos
 	// base info league top-10-25-50-100
 	// top-10 table
+	// ban
+	// register promo
 	const username = userStore((state: any) => state.username)
 	const userLevel = userStore((state: any) => state.level)
 	const userWins = userStore((state: any) => state.wins)
