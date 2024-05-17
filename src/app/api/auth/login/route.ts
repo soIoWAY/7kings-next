@@ -21,7 +21,11 @@ export async function POST(req: NextRequest) {
 
 	const cookieOptions = `HttpOnly; Max-Age=${24 * 60 * 2}; Path=/`
 	const userCookie = `user=${encodeURIComponent(
-		JSON.stringify({ username: foundUser.username })
+		JSON.stringify({
+			username: foundUser.username,
+			role: foundUser.role,
+			status: foundUser.status,
+		})
 	)}; ${cookieOptions}`
 
 	return NextResponse.json(
