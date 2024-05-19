@@ -1,6 +1,21 @@
+'use client'
+import { useRouter } from 'next/navigation'
 import { GiMeepleKing } from 'react-icons/gi'
 
 export default function BanPage() {
+	const router = useRouter()
+	const logoutHandler = async () => {
+		try {
+			const res = await fetch('/api/logout', {
+				method: 'POST',
+			})
+			if (res.ok) {
+				router.push('/')
+			}
+		} catch (error) {
+			console.error('Error during logout', error)
+		}
+	}
 	return (
 		<div className='text-white h-screen flex flex-col justify-center items-center'>
 			<div className='flex flex-col items-center'>
@@ -22,6 +37,12 @@ export default function BanPage() {
 					bet ban
 				</p>
 				<p className='tracking-wide font-semibold'>7kingsupport@gmail.com</p>
+				<button
+					onClick={logoutHandler}
+					className='bg-green-400 text-white rounded-md px-3 py-1'
+				>
+					Logout
+				</button>
 			</div>
 		</div>
 	)

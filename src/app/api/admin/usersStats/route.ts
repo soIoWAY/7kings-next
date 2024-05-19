@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
 	try {
+		console.log('Fetching data from the database at:', new Date().toISOString())
 		const players = await prisma.user.findMany({
 			select: {
 				id: true,
