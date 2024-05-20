@@ -37,14 +37,17 @@ export default function AdminDashboardPage() {
 						<div className='flex gap-2'>
 							<DashboardCard
 								title='Games played'
+								textColor='text-white'
 								data={String(totalUsersGames)}
 							/>
 							<DashboardCard
 								title='Registered players'
+								textColor='text-white'
 								data={String(registeredPlayers)}
 							/>
 							<DashboardCard
 								title='Money in Users'
+								textColor='text-green-500'
 								data={String(totalMoneyInUsers + '$')}
 							/>
 						</div>
