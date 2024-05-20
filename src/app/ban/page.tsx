@@ -1,9 +1,11 @@
 'use client'
+import { userStore } from '@/store/user'
 import { useRouter } from 'next/navigation'
 import { GiMeepleKing } from 'react-icons/gi'
 
 export default function BanPage() {
 	const router = useRouter()
+	const username = userStore((state: any) => state.username)
 	const logoutHandler = async () => {
 		try {
 			const res = await fetch('/api/auth/logout', {
@@ -27,7 +29,8 @@ export default function BanPage() {
 			</div>
 			<div className='text-center mt-2'>
 				<h2 className='text-2xl'>
-					Hello, <span className='font-semibold text-green-400'>User</span>
+					Hello,{' '}
+					<span className='font-semibold text-green-400'>{username}</span>
 				</h2>
 				<p className='text-red-500 font-semibold'>
 					You`re banned by administration
