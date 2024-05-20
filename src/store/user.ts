@@ -14,5 +14,6 @@ export const userStore = create(async set => {
 		balance: data.balance || 0,
 		username: data.username || '',
 		level: data.level || 0,
+		promocode: data.promocode || '',
 	})
 })
