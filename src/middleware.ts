@@ -6,13 +6,18 @@ export default function middleware(req: NextRequest) {
 	let url = req.url
 	let userRole = null
 	let userStatus = null
-	const siteUrl = 'https://7kings.vercel.app/'
+	//https://7kings.vercel.app/
+	const siteUrl = 'http://localhost:3000'
 
 	if (userCookie) {
-		const decodedCookie = decodeURIComponent(userCookie)
-		const userData = JSON.parse(decodedCookie)
-		userRole = userData.role
-		userStatus = userData.status
+		try {
+			const decodedCookie = decodeURIComponent(userCookie)
+			const userData = JSON.parse(decodedCookie)
+			userRole = userData.role
+			userStatus = userData.status
+		} catch (error) {
+			console.error('Error decoding or parsing cookie:', error)
+		}
 	}
 
 	if (
@@ -25,15 +30,21 @@ export default function middleware(req: NextRequest) {
 		return NextResponse.redirect(`${siteUrl}/auth/login`)
 	}
 
-	if (userRole !== 'admin' && url?.includes('/admin')) {
-		return NextResponse.redirect(`${siteUrl}`)
+	if (
+		userStatus === 'ban' &&
+		(url?.includes('/games') ||
+			url?.includes('/wallet') ||
+			url?.includes('/dashboard') ||
+			url?.includes('/admin'))
+	) {
+		return NextResponse.redirect(`${siteUrl}/ban`)
 	}
 
 	if (userRole === 'admin' && url?.includes('/dashboard')) {
 		return NextResponse.redirect(`${siteUrl}/admin-dashboard`)
 	}
 
-	if (userStatus === 'ban') {
-		return NextResponse.redirect(`${siteUrl}/ban`)
+	if (userRole !== 'admin' && url?.includes('/admin')) {
+		return NextResponse.redirect(`${siteUrl}`)
 	}
 }

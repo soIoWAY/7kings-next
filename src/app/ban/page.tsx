@@ -6,7 +6,7 @@ export default function BanPage() {
 	const router = useRouter()
 	const logoutHandler = async () => {
 		try {
-			const res = await fetch('/api/logout', {
+			const res = await fetch('/api/auth/logout', {
 				method: 'POST',
 			})
 			if (res.ok) {
@@ -16,6 +16,7 @@ export default function BanPage() {
 			console.error('Error during logout', error)
 		}
 	}
+
 	return (
 		<div className='text-white h-screen flex flex-col justify-center items-center'>
 			<div className='flex flex-col items-center'>
@@ -26,7 +27,7 @@ export default function BanPage() {
 			</div>
 			<div className='text-center mt-2'>
 				<h2 className='text-2xl'>
-					Hello, <span className='font-semibold text-green-400'>Vet</span>
+					Hello, <span className='font-semibold text-green-400'>User</span>
 				</h2>
 				<p className='text-red-500 font-semibold'>
 					You`re banned by administration
@@ -39,7 +40,7 @@ export default function BanPage() {
 				<p className='tracking-wide font-semibold'>7kingsupport@gmail.com</p>
 				<button
 					onClick={logoutHandler}
-					className='bg-green-400 text-white rounded-md px-3 py-1'
+					className='bg-green-400 text-white rounded-md px-3 py-1 mt-2'
 				>
 					Logout
 				</button>
