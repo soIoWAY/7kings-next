@@ -1,4 +1,6 @@
 import { userStore } from '@/store/user'
+import { useRouter } from 'next/navigation'
+import { IoLogOut } from 'react-icons/io5'
 import Ranks from '../Main/Ranks'
 import DashboardCard from './DashboardCard'
 import DashboardForm from './DashboardForm'
@@ -10,45 +12,111 @@ const Dashboard = () => {
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
 	const totalUserGames = userWins + userLoses
+	const winPercent = (userWins / totalUserGames) * 100
+	const formattedWinPercent = winPercent.toFixed(2)
+	const promocode = userStore((state: any) => state.promocode)
+	const router = useRouter()
+	const logoutHandler = async () => {
+		try {
+			const res = await fetch('/api/auth/logout', {
+				method: 'POST',
+			})
+			if (res.ok) {
+				router.push('/')
+				window.location.reload()
+			}
+		} catch (error) {
+			console.error('Error during logout', error)
+		}
+	}
 	return (
 		<div>
 			<Ranks />
-			<div className='bg-[#1a1a1a] mt-3 rounded-md p-5'>
+			<div className='bg-[#1a1a1a] mt-3 rounded-md p-5 flex justify-between'>
 				<div className='flex flex-col text-white gap-6'>
 					<div className='flex flex-col gap-1'>
 						<h2 className='text-xl font-bold'>User info</h2>
 						<div className='flex gap-2'>
-							<DashboardCard title='Username' data={username} />
-							<DashboardCard title='Level' data={userLevel} />
-							<DashboardCard title='League' data='🚫' />
+							<DashboardCard
+								title='Username'
+								data={username}
+								textColor='text-white'
+							/>
+							<DashboardCard
+								title='Level'
+								data={userLevel}
+								textColor='text-white'
+							/>
+							<DashboardCard title='League' data='🚫' textColor='text-white' />
 						</div>
 					</div>
 					<div className='flex flex-col gap-1'>
 						<h2 className='text-xl font-bold'>Game stats</h2>
 						<div className='flex gap-2'>
-							<DashboardCard title='Games played' data={totalUserGames} />
-							<DashboardCard title='Win games' data={userWins} />
-							<DashboardCard title='Lose games' data={userLoses} />
+							<DashboardCard
+								title='Games played'
+								data={totalUserGames}
+								textColor='text-white'
+							/>
+							<DashboardCard
+								title='Win games'
+								data={userWins}
+								textColor='text-green-500'
+							/>
+							<DashboardCard
+								title='Lose games'
+								data={userLoses}
+								textColor='text-red-500'
+							/>
+							<DashboardCard
+								title='Win %'
+								data={String(formattedWinPercent)}
+								textColor={winPercent >= 50 ? 'text-green-500' : 'text-red-500'}
+							/>
 						</div>
 					</div>
-					<div className='flex flex-col gap-1'>
-						<h2 className='text-xl font-bold'>Promo & referrals</h2>
-						<div className='flex gap-2'>
-							<DashboardCard title='Promo' data='#vet7' />
-							<DashboardCard title='Referrals' data='24' />
-							<DashboardCard title='Earn from refs' data='127$' />
-						</div>
+					<div>
+						{promocode ? (
+							<div className='flex flex-col gap-1'>
+								<h2 className='text-xl font-bold'>Promo & referrals</h2>
+								<div className='flex gap-2'>
+									<DashboardCard
+										title='Promo'
+										data={`#${promocode}`}
+										textColor='text-white'
+									/>
+									<DashboardCard
+										title='Referrals'
+										data='24'
+										textColor='text-white'
+									/>
+									<DashboardCard
+										title='Earn from refs'
+										data='127$'
+										textColor='text-green-500'
+									/>
+								</div>
+							</div>
+						) : (
+							<DashboardForm title='Create promocode' userLevel={userLevel} />
+						)}
 					</div>
-
-					<DashboardForm title='Create promocode' />
 
 					<DashboardTransferForm />
 					<div className='flex flex-col gap-1'>
 						<h2 className='text-xl font-bold'>Account information</h2>
-						<DashboardCard title='Register data' data='21.04.2024' />
+						<DashboardCard
+							title='Register data'
+							data='21.04.2024'
+							textColor='text-white'
+						/>
 					</div>
 				</div>
-				Ra
+				<div>
+					<button className='text-3xl text-green-500' onClick={logoutHandler}>
+						<IoLogOut />
+					</button>
+				</div>
 			</div>
 		</div>
 	)
