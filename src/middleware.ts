@@ -7,7 +7,7 @@ export default function middleware(req: NextRequest) {
 	let userRole = null
 	let userStatus = null
 	//https://7kings.vercel.app/
-	const siteUrl = 'http://localhost:3000'
+	const siteUrl = 'https://7kings.vercel.app'
 
 	if (userCookie) {
 		try {
