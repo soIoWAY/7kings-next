@@ -1,6 +1,7 @@
 'use client'
 import AdminAddMoney from '@/components/Dashboard/AdminDashboard/AdminAddMoney'
 import AdminBan from '@/components/Dashboard/AdminDashboard/AdminBan'
+import AdminSearchUser from '@/components/Dashboard/AdminDashboard/AdminSearchUser'
 import Dashboard from '@/components/Dashboard/Dashboard'
 import DashboardCard from '@/components/Dashboard/DashboardCard'
 import { useEffect, useState } from 'react'
@@ -59,6 +60,7 @@ export default function AdminDashboardPage() {
 							<AdminBan />
 						</div>
 					</div>
+					<AdminSearchUser />
 				</div>
 			</div>
 			<Dashboard />

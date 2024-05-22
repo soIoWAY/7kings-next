@@ -85,7 +85,7 @@ export default function FruitsPage() {
 				setUserBet={setUserBet}
 				userBet={userBet}
 				interval={1550}
-				disabledAuto={false}
+				disabledAuto={true}
 			/>
 		</div>
 	)
