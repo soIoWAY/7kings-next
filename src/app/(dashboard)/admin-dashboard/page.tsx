@@ -34,7 +34,7 @@ export default function AdminDashboardPage() {
 					</h2>
 					<div className='flex flex-col gap-1'>
 						<h2 className='text-xl font-bold'>General stats</h2>
-						<div className='flex gap-2'>
+						<div className='flex gap-2 flex-wrap'>
 							<DashboardCard
 								title='Games played'
 								textColor='text-white'

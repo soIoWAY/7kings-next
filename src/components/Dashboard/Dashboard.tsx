@@ -1,6 +1,5 @@
 import { userStore } from '@/store/user'
 import { useRouter } from 'next/navigation'
-import { IoLogOut } from 'react-icons/io5'
 import Ranks from '../Main/Ranks'
 import DashboardCard from './DashboardCard'
 import DashboardForm from './DashboardForm'
@@ -53,27 +52,33 @@ const Dashboard = () => {
 					</div>
 					<div className='flex flex-col gap-1'>
 						<h2 className='text-xl font-bold'>Game stats</h2>
-						<div className='flex gap-2'>
-							<DashboardCard
-								title='Games played'
-								data={totalUserGames}
-								textColor='text-white'
-							/>
-							<DashboardCard
-								title='Win games'
-								data={userWins}
-								textColor='text-green-500'
-							/>
-							<DashboardCard
-								title='Lose games'
-								data={userLoses}
-								textColor='text-red-500'
-							/>
-							<DashboardCard
-								title='Win %'
-								data={String(formattedWinPercent)}
-								textColor={winPercent >= 50 ? 'text-green-500' : 'text-red-500'}
-							/>
+						<div className='flex flex-col sm:flex-row gap-2'>
+							<div className='flex gap-2'>
+								<DashboardCard
+									title='Games played'
+									data={totalUserGames}
+									textColor='text-white'
+								/>
+								<DashboardCard
+									title='Win games'
+									data={userWins}
+									textColor='text-green-500'
+								/>
+								<DashboardCard
+									title='Lose games'
+									data={userLoses}
+									textColor='text-red-500'
+								/>
+							</div>
+							<div>
+								<DashboardCard
+									title='Win %'
+									data={String(formattedWinPercent)}
+									textColor={
+										winPercent >= 50 ? 'text-green-500' : 'text-red-500'
+									}
+								/>
+							</div>
 						</div>
 					</div>
 					<div>
@@ -113,11 +118,11 @@ const Dashboard = () => {
 						/>
 					</div>
 				</div>
-				<div>
+				{/* <div>
 					<button className='text-3xl text-green-500' onClick={logoutHandler}>
 						<IoLogOut />
 					</button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

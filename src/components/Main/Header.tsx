@@ -32,7 +32,9 @@ const Header = () => {
 					className='logo text-green-400 text-3xl md:text-4xl flex gap-2 items-center'
 				>
 					<GiMeepleKing />
-					<span className='text-lg md:text-xl text-white'>7Kings</span>
+					<span className='text-lg md:text-xl text-white font-bold tracking-wide'>
+						7Kings
+					</span>
 				</Link>
 			</div>
 			<div className='wallet flex gap-2 items-center'>
