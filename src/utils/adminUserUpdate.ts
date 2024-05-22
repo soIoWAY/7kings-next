@@ -6,7 +6,7 @@ const adminUserUpdate = async (
 	status?: string
 ) => {
 	try {
-		await fetch('https://7kings.vercel.app/api/admin/updateUserStats', {
+		await fetch(`${process.env.NEXT_PUBLIC_URL}/api/admin/updateUserStats`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',

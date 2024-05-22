@@ -3,7 +3,7 @@ export const userStore = create(async set => {
 	// http://localhost:3000
 	// https://7kings.vercel.app
 	const url = 'https://7kings.vercel.app'
-	const response = await fetch(`${url}/api/user/info`, {
+	const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user/info`, {
 		credentials: 'include',
 	})
 	const data = await response.json()

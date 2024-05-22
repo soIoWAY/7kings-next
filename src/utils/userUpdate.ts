@@ -5,9 +5,8 @@ const updateUserInfo = async (
 	level?: number,
 	promocode?: string
 ) => {
-	// https://7kings.vercel.app/
 	try {
-		await fetch('https://7kings.vercel.app/api/user/updateInfo', {
+		await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user/updateInfo`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',

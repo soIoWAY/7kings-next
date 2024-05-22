@@ -6,8 +6,6 @@ export default function middleware(req: NextRequest) {
 	let url = req.url
 	let userRole = null
 	let userStatus = null
-	//https://7kings.vercel.app
-	const siteUrl = 'https://7kings.vercel.app'
 
 	if (userCookie) {
 		try {
@@ -27,7 +25,7 @@ export default function middleware(req: NextRequest) {
 			url?.includes('/dashboard') ||
 			url?.includes('/admin'))
 	) {
-		return NextResponse.redirect(`${siteUrl}/auth/login`)
+		return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/auth/login`)
 	}
 
 	if (
@@ -37,14 +35,16 @@ export default function middleware(req: NextRequest) {
 			url?.includes('/dashboard') ||
 			url?.includes('/admin'))
 	) {
-		return NextResponse.redirect(`${siteUrl}/ban`)
+		return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/ban`)
 	}
 
 	if (userRole === 'admin' && url?.includes('/dashboard')) {
-		return NextResponse.redirect(`${siteUrl}/admin-dashboard`)
+		return NextResponse.redirect(
+			`${process.env.NEXT_PUBLIC_URL}/admin-dashboard`
+		)
 	}
 
 	if (userRole !== 'admin' && url?.includes('/admin')) {
-		return NextResponse.redirect(`${siteUrl}`)
+		return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}`)
 	}
 }
