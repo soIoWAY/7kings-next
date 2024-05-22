@@ -11,7 +11,7 @@ model User {
   id             String   @unique @default(uuid())
   username       String   @unique
   hashedPassword String
-  balance        Int      @default(100)
+  balance        Int      @default(1000)
   wins           Int      @default(0)
   loses          Int      @default(0)
   role           String   @default("user")
