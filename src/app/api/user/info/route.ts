@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
 		}
 
 		let user = null
+
 		if (username !== null) {
 			user = await prisma.user.findUnique({
 				where: {
@@ -24,15 +25,25 @@ export async function GET(req: NextRequest) {
 					wins: true,
 					loses: true,
 					level: true,
+					promocode: true,
 				},
 			})
 		}
+
+		const promocode = user?.promocode ?? ''
+
+		const promocodeUsers = await prisma.user.count({
+			where: {
+				enteredPromocode: promocode,
+			},
+		})
+
 		const balance = user?.balance ?? 0
 		const wins = user?.wins ?? 0
 		const loses = user?.loses ?? 0
 		const level = user?.level ?? 0
 		return NextResponse.json(
-			{ balance, username, wins, loses, level },
+			{ balance, username, wins, loses, level, promocode, promocodeUsers },
 			{ status: 200 }
 		)
 	} catch (error) {

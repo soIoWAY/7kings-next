@@ -11,6 +11,7 @@ const Dashboard = () => {
 	const userLevel = userStore((state: any) => state.level)
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
+	const referrals = userStore((state: any) => state.promocodeUsers)
 	const totalUserGames = userWins + userLoses
 	const winPercent = (userWins / totalUserGames) * 100
 	const formattedWinPercent = winPercent.toFixed(2)
@@ -87,7 +88,7 @@ const Dashboard = () => {
 									/>
 									<DashboardCard
 										title='Referrals'
-										data='24'
+										data={referrals}
 										textColor='text-white'
 									/>
 									<DashboardCard

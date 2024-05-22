@@ -38,7 +38,7 @@ const Card = ({
 				</span>
 				<div className='absolute bottom-4'>
 					<Link
-						href='/referrals'
+						href='/dashboard'
 						className='text-white bg-white bg-opacity-30 rounded-full w-8 h-8 mt-5 flex items-center justify-center'
 					>
 						<IoIosArrowForward />

@@ -19,6 +19,7 @@ export default function RegisterPage() {
 	const submitHandler = async (values: {
 		username: string
 		password: string
+		enteredPromocode: string
 	}) => {
 		try {
 			const response = await fetch('/api/auth/register', {
@@ -42,7 +43,7 @@ export default function RegisterPage() {
 				REGISTER
 			</h1>
 			<Formik
-				initialValues={{ username: '', password: '' }}
+				initialValues={{ username: '', password: '', enteredPromocode: '' }}
 				validationSchema={SignUpSchema}
 				validateOnChange={true}
 				validateOnBlur={false}
@@ -93,6 +94,23 @@ export default function RegisterPage() {
 							type='password'
 							className='bg-transparent border border-green-400 outline-none py-2 px-2'
 							placeholder='Confirm Password'
+						/>
+						<ErrorMessage
+							name='confirmPassword'
+							component='div'
+							className='text-red-500 text-sm'
+						/>
+					</div>
+					<div className='flex flex-col gap-1'>
+						<label htmlFor='confirmPassword' className='text-gray-300 text-sm'>
+							Promocode (not necessarily)
+						</label>
+						<Field
+							id='enteredPromocode'
+							name='enteredPromocode'
+							type='text'
+							className='bg-transparent border border-green-400 outline-none py-2 px-2'
+							placeholder='Promocode'
 						/>
 						<ErrorMessage
 							name='confirmPassword'

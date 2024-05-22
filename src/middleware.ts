@@ -6,7 +6,7 @@ export default function middleware(req: NextRequest) {
 	let url = req.url
 	let userRole = null
 	let userStatus = null
-	//https://7kings.vercel.app/
+	//https://7kings.vercel.app
 	const siteUrl = 'https://7kings.vercel.app'
 
 	if (userCookie) {

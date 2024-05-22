@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(req: NextRequest) {
 	const dataPromise = req.json()
 	const data = await dataPromise
-	const { username, password } = data
+	const { username, password, enteredPromocode } = data
 
 	const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
 			data: {
 				username,
 				hashedPassword,
+				enteredPromocode,
 			},
 		})
 

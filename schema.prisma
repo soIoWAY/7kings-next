@@ -19,5 +19,6 @@ model User {
   updateAt       DateTime @updatedAt
   level          Int      @default(1)
   status         String   @default("unban")
-  promocode      String   @default("")
+  promocode      String   @unique @default("")
+  enteredPromocode String @default("")
 }
