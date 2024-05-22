@@ -135,9 +135,10 @@ export default function WalletPage() {
 						className='bg-green-500 w-full rounded-md font-semibold tracking-wide text-md py-1'
 						type='submit'
 						value='Confirm'
+						disabled
 					/>
 
-					<button className='text-center text-sm text-gray-200'>
+					<button className='text-center text-sm text-gray-200' disabled>
 						Have a promocode?
 					</button>
 				</Form>
