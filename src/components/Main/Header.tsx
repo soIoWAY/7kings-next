@@ -1,5 +1,6 @@
 'use client'
 import { userStore } from '@/store/user'
+import { formattedBalanceToK } from '@/utils/formattedBalanceToK'
 import Link from 'next/link'
 import { useState } from 'react'
 import { AiOutlineStock } from 'react-icons/ai'
@@ -17,16 +18,6 @@ const Header = () => {
 	const liStyle =
 		'flex items-center text-xl gap-3 hover:text-green-400 transition-all tracking-widest'
 	const linkStyle = 'hover:text-white transition-all flex-1'
-
-	const formattedUserBalance = (balance: number) => {
-		if (balance < 1000) {
-			return balance.toString()
-		} else if (balance < 1000000) {
-			return (balance / 1000).toFixed(1) + 'k'
-		} else {
-			return (balance / 1000000).toFixed(1) + 'kk'
-		}
-	}
 
 	return (
 		<div className='flex justify-between'>
@@ -54,7 +45,7 @@ const Header = () => {
 				>
 					$
 					{userBalance ? (
-						<span>{formattedUserBalance(userBalance)}</span>
+						<span>{formattedBalanceToK(userBalance)}</span>
 					) : (
 						<span>0</span>
 					)}

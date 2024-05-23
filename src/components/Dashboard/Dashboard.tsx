@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import Ranks from '../Main/Ranks'
 import DashboardCard from './DashboardCard'
 import DashboardForm from './DashboardForm'
+import DashboardTop from './DashboardTop'
 import DashboardTransferForm from './DashboardTransferForm'
 
 const Dashboard = () => {
@@ -17,6 +18,7 @@ const Dashboard = () => {
 	const formattedWinPercent = winPercent.toFixed(2)
 	const promocode = userStore((state: any) => state.promocode)
 	const router = useRouter()
+
 	const logoutHandler = async () => {
 		try {
 			const res = await fetch('/api/auth/logout', {
@@ -33,7 +35,7 @@ const Dashboard = () => {
 	return (
 		<div>
 			<Ranks />
-			<div className='bg-[#1a1a1a] mt-3 rounded-md p-5 flex justify-between'>
+			<div className='bg-[#1a1a1a] mt-3 rounded-md p-5 flex justify-between sm:flex-row flex-col gap-3 sm:gap-0 '>
 				<div className='flex flex-col text-white gap-6'>
 					<div className='flex flex-col gap-1'>
 						<h2 className='text-xl font-bold'>User info</h2>
@@ -124,6 +126,7 @@ const Dashboard = () => {
 						/>
 					</div>
 				</div>
+				<DashboardTop />
 				{/* <div>
 					<button className='text-3xl text-green-500' onClick={logoutHandler}>
 						<IoLogOut />
