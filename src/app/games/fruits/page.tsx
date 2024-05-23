@@ -17,7 +17,7 @@ export default function FruitsPage() {
 	const [isAnimatingCompleted, setIsAnimatingCompleted] = useState(false)
 	const [userBet, setUserBet] = useState<number>(1)
 
-	const fruits = ['🍒', '🍏', '🍋', '🍌', '🍇', '💣']
+	const fruits = ['🍒', '🍏', '🍋', '🍌', '🍇', '💣'] //, '🍏', '🍋', '🍌', '🍇', '💣'
 	const randomFruit = () => {
 		return Math.floor(Math.random() * fruits.length)
 	}
@@ -85,7 +85,7 @@ export default function FruitsPage() {
 				setUserBet={setUserBet}
 				userBet={userBet}
 				interval={1550}
-				disabledAuto={false}
+				disabledAuto={true}
 			/>
 		</div>
 	)

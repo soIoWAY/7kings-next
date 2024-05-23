@@ -19,6 +19,10 @@ model User {
   updateAt       DateTime @updatedAt
   level          Int      @default(1)
   status         String   @default("unban")
+<<<<<<< HEAD
   promocode      String?   @unique @default("")
+=======
+  promocode      String?   @unique
+>>>>>>> cherryLogic
   enteredPromocode String @default("")
 }

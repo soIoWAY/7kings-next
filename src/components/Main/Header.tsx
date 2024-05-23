@@ -1,5 +1,6 @@
 'use client'
 import { userStore } from '@/store/user'
+import { formattedBalanceToK } from '@/utils/formattedBalanceToK'
 import Link from 'next/link'
 import { useState } from 'react'
 import { AiOutlineStock } from 'react-icons/ai'
@@ -32,7 +33,7 @@ const Header = () => {
 					className='logo text-green-400 text-3xl md:text-4xl flex gap-2 items-center'
 				>
 					<GiMeepleKing />
-					<span className='text-lg md:text-xl text-white font-bold tracking-wide'>
+					<span className='text-lg md:text-xl text-white font-normal sm:font-bold tracking-wide'>
 						7Kings
 					</span>
 				</Link>
@@ -43,7 +44,11 @@ const Header = () => {
 					className='bg-black rounded-md text-white py-1 md:py-2 px-2 md:px-4 text-center'
 				>
 					$
-					{userBalance ? <span>{userBalance.toFixed(2)}</span> : <span>0</span>}
+					{userBalance ? (
+						<span>{formattedBalanceToK(userBalance)}</span>
+					) : (
+						<span>0</span>
+					)}
 				</Link>
 				<Link
 					href='/wallet'

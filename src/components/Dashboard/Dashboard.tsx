@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import Ranks from '../Main/Ranks'
 import DashboardCard from './DashboardCard'
 import DashboardForm from './DashboardForm'
+import DashboardTop from './DashboardTop'
 import DashboardTransferForm from './DashboardTransferForm'
 
 const Dashboard = () => {
@@ -10,12 +11,14 @@ const Dashboard = () => {
 	const userLevel = userStore((state: any) => state.level)
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
+	const userBalance = userStore((state: any) => state.balance)
 	const referrals = userStore((state: any) => state.promocodeUsers)
 	const totalUserGames = userWins + userLoses
 	const winPercent = (userWins / totalUserGames) * 100
 	const formattedWinPercent = winPercent.toFixed(2)
 	const promocode = userStore((state: any) => state.promocode)
 	const router = useRouter()
+
 	const logoutHandler = async () => {
 		try {
 			const res = await fetch('/api/auth/logout', {
@@ -32,7 +35,7 @@ const Dashboard = () => {
 	return (
 		<div>
 			<Ranks />
-			<div className='bg-[#1a1a1a] mt-3 rounded-md p-5 flex justify-between'>
+			<div className='bg-[#1a1a1a] mt-3 rounded-md p-5 flex justify-between sm:flex-row flex-col gap-3 sm:gap-0 '>
 				<div className='flex flex-col text-white gap-6'>
 					<div className='flex flex-col gap-1'>
 						<h2 className='text-xl font-bold'>User info</h2>
@@ -70,13 +73,18 @@ const Dashboard = () => {
 									textColor='text-red-500'
 								/>
 							</div>
-							<div>
+							<div className='flex gap-2'>
 								<DashboardCard
 									title='Win %'
 									data={String(formattedWinPercent)}
 									textColor={
 										winPercent >= 50 ? 'text-green-500' : 'text-red-500'
 									}
+								/>
+								<DashboardCard
+									title='Detailed balance'
+									data={`${userBalance}$`}
+									textColor='text-green-500'
 								/>
 							</div>
 						</div>
@@ -118,6 +126,7 @@ const Dashboard = () => {
 						/>
 					</div>
 				</div>
+				<DashboardTop />
 				{/* <div>
 					<button className='text-3xl text-green-500' onClick={logoutHandler}>
 						<IoLogOut />
