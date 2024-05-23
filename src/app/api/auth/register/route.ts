@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
 
 		return NextResponse.json({ msg: 'Successful' }, { status: 201 })
 	} catch (error) {
+		console.error(error)
 		return NextResponse.json(
 			{ msg: 'Error during data processing' },
 			{ status: 500 }
