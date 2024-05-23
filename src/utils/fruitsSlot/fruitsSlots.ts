@@ -37,25 +37,27 @@ const fruitsChecker = (
 	userLoses: number
 ) => {
 	const multiplier = lvlWinMultipliers[userLevel] || 1
-	const fruitMultipliers = {
+	const fruitMultipliers: { [key: string]: number } = {
 		'🍒': 10,
 		'🍏': 8,
 		'🍋': 7,
 		'🍌': 6,
 		'🍇': 5,
 	}
-	if (fruits.every(fruit => fruit === '🍒')) {
-		winUpdate(userBalance, userBet, 10, multiplier, userWins)
-	} else if (fruits.every(fruit => fruit === '🍏')) {
-		winUpdate(userBalance, userBet, 8, multiplier, userWins)
-	} else if (fruits.every(fruit => fruit === '🍋')) {
-		winUpdate(userBalance, userBet, 7, multiplier, userWins)
-	} else if (fruits.every(fruit => fruit === '🍌')) {
-		winUpdate(userBalance, userBet, 6, multiplier, userWins)
-	} else if (fruits.every(fruit => fruit === '🍇')) {
-		winUpdate(userBalance, userBet, 5, multiplier, userWins)
-	} else if (fruits[0] === '💣' || fruits[1] === '💣' || fruits[2] === '💣') {
-		loseUpdate(userLoses) // lose
+	const allEqual = (arr: string[]) => arr.every(fruit => fruit === arr[0])
+	const allDifferent = (arr: string[]) =>
+		arr[0] !== arr[1] && arr[1] !== arr[2] && arr[0] !== arr[2]
+	if (fruits.includes('💣')) {
+		loseUpdate(userLoses)
+	} else if (allEqual(fruits)) {
+		const fruit = fruits[0]
+		winUpdate(
+			userBalance,
+			userBet,
+			fruitMultipliers[fruit],
+			multiplier,
+			userWins
+		)
 	} else if (
 		(fruits[0] === '🍒' && fruits[1] === fruits[0]) ||
 		(fruits[1] === '🍒' && fruits[2] === fruits[1])
@@ -81,16 +83,10 @@ const fruitsChecker = (
 		(fruits[1] === '🍇' && fruits[2] === fruits[1])
 	) {
 		winUpdate(userBalance, userBet, 2, multiplier, userWins)
-	} else if (
-		fruits[0] !== fruits[1] &&
-		fruits[1] !== fruits[2] &&
-		fruits[0] !== fruits[2]
-	) {
+	} else if (allDifferent(fruits)) {
 		winUpdate(userBalance, userBet, 1.5, multiplier, userWins)
 	} else {
-		const newLoses = userLoses + 1
-		userStore.setState({ loses: newLoses })
-		updateUserInfo(undefined, newLoses, undefined, undefined)
+		loseUpdate(userLoses)
 	}
 }
 
