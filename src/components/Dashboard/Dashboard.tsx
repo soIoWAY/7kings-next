@@ -83,7 +83,7 @@ const Dashboard = () => {
 								/>
 								<DashboardCard
 									title='Detailed balance'
-									data={`${userBalance}$`}
+									data={`${userBalance.toFixed(2)}$`}
 									textColor='text-green-500'
 								/>
 							</div>
