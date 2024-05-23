@@ -2,7 +2,7 @@
 import { userStore } from '@/store/user'
 import { updateUserInfo } from '@/utils/userUpdate'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { MdShield } from 'react-icons/md'
 const Ranks = () => {
 	const [winsToNextLevel, setWinsToNextLevel] = useState(0)
@@ -10,32 +10,44 @@ const Ranks = () => {
 	const username = userStore((state: any) => state.username)
 	const userLevel = userStore((state: any) => state.level)
 
-	useEffect(() => {
-		const levelUp = () => {
-			const neededWins = winsNeededForNextLevel(userLevel)
-			if (userWins >= neededWins) {
-				const newLevel = userLevel + 1
-				userStore.setState({ level: newLevel })
-				updateUserInfo(undefined, undefined, undefined, newLevel)
-			}
+	const winsNeededForNextLevel = useCallback((level: number) => {
+		switch (level) {
+			case 1:
+				return 25
+			case 2:
+				return 50
+			case 3:
+				return 100
+			case 4:
+				return 250
+			case 5:
+				return 0
+			default:
+				return 0
 		}
-		levelUp()
-		setWinsToNextLevel(winsNeededForNextLevel(userLevel) - userWins)
-	}, [userLevel, userWins])
+	}, [])
 
-	const winsNeededForNextLevel = (level: number) => {
-		if (level === 1) {
-			return 25
-		} else if (level === 2) {
-			return 50
-		} else if (level === 3) {
-			return 100
-		} else if (level === 4) {
-			return 250
-		} else {
-			return 0
+	useEffect(() => {
+		const neededWins = winsNeededForNextLevel(userLevel)
+
+		if (userWins >= neededWins && userLevel < 5) {
+			const newLevel = userLevel + 1
+			userStore.setState({ level: newLevel })
+			updateUserInfo(undefined, undefined, undefined, newLevel)
 		}
-	}
+
+		if (userLevel < 5) {
+			setWinsToNextLevel(neededWins - userWins)
+		} else {
+			setWinsToNextLevel(0)
+		}
+	}, [
+		userWins,
+		userLevel,
+		updateUserInfo,
+		setWinsToNextLevel,
+		winsNeededForNextLevel,
+	])
 
 	return (
 		<div className='mt-8 bg-[#162A24] rounded-md flex flex-col gap-6 md:flex-row justify-between md:items-center py-6 px-4 lg:py-8 lg:px-6'>
