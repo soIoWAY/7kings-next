@@ -10,6 +10,7 @@ const Dashboard = () => {
 	const userLevel = userStore((state: any) => state.level)
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
+	const userBalance = userStore((state: any) => state.balance)
 	const referrals = userStore((state: any) => state.promocodeUsers)
 	const totalUserGames = userWins + userLoses
 	const winPercent = (userWins / totalUserGames) * 100
@@ -70,13 +71,18 @@ const Dashboard = () => {
 									textColor='text-red-500'
 								/>
 							</div>
-							<div>
+							<div className='flex gap-2'>
 								<DashboardCard
 									title='Win %'
 									data={String(formattedWinPercent)}
 									textColor={
 										winPercent >= 50 ? 'text-green-500' : 'text-red-500'
 									}
+								/>
+								<DashboardCard
+									title='Detailed balance'
+									data={`${userBalance}$`}
+									textColor='text-green-500'
 								/>
 							</div>
 						</div>
