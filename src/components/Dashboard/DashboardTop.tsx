@@ -9,7 +9,7 @@ interface IDashboardTop {
 
 async function fetchUsers() {
 	try {
-		const url = '/api/users/topUsers'
+		const url = `${process.env.NEXT_PUBLIC_URL}/api/users/topUsers`
 		const response = await axios.get(url)
 		return response.data
 	} catch (error) {
