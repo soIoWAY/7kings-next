@@ -9,9 +9,7 @@ interface IDashboardTop {
 async function getUsers(): Promise<IDashboardTop[]> {
 	try {
 		const urls = `${process.env.NEXT_PUBLIC_URL}/api/users/topUsers`
-		const response = await fetch(urls, {
-			cache: 'no-store',
-		})
+		const response = await fetch(urls, { next: { revalidate: 0 } })
 		const data = await response.json()
 		console.log(data.users)
 		return data.users
