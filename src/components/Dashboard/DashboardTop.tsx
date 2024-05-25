@@ -10,7 +10,7 @@ async function getUsers(): Promise<IDashboardTop[]> {
 	try {
 		const urls = `${process.env.NEXT_PUBLIC_URL}/api/users/topUsers`
 		const response = await fetch(urls, {
-			credentials: 'include',
+			cache: 'no-store',
 		})
 		const data = await response.json()
 		console.log(data.users)
