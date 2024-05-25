@@ -13,7 +13,7 @@ export default function AdminDashboardPage() {
 
 	const fetchUsersStats = async () => {
 		try {
-			const res = await fetch('api/admin/usersStats', { cache: 'no-store' })
+			const res = await fetch('api/admin/usersStats')
 			const data = await res.json()
 			console.log(data)
 			setTotalUsersGames(data.totalGames)
