@@ -10,7 +10,11 @@ interface IDashboardTop {
 async function fetchUsers() {
 	try {
 		const urls = `${process.env.NEXT_PUBLIC_URL}/api/users/topUsers`
-		const response = await axios.get(urls)
+		const response = await axios.get(urls, {
+			headers: {
+				'Cache-Control': 'no-cache',
+			},
+		})
 		return response.data
 	} catch (error) {
 		console.error(error)
