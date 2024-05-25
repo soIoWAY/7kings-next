@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import DashboardTopPos from './DashboardTopPos'
 
@@ -7,15 +6,15 @@ interface IDashboardTop {
 	balance: number
 }
 
-async function fetchUsers() {
+async function getUsers(): Promise<IDashboardTop[]> {
 	try {
 		const urls = `${process.env.NEXT_PUBLIC_URL}/api/users/topUsers`
-		const response = await axios.get(urls, {
-			headers: {
-				'Cache-Control': 'no-cache',
-			},
+		const response = await fetch(urls, {
+			credentials: 'include',
 		})
-		return response.data
+		const data = await response.json()
+		console.log(data.users)
+		return data.users
 	} catch (error) {
 		console.error(error)
 		return []
@@ -24,13 +23,15 @@ async function fetchUsers() {
 
 export default function DashboardTop() {
 	const [topUsersByMoney, setTopUsersByMoney] = useState<IDashboardTop[]>([])
+
 	useEffect(() => {
-		const getUsers = async () => {
-			const fetchedUsers = await fetchUsers()
-			setTopUsersByMoney(fetchedUsers.users)
+		async function fetchAndSetUsers() {
+			const fetchedUsers = await getUsers()
+			setTopUsersByMoney(fetchedUsers)
 		}
-		getUsers()
+		fetchAndSetUsers()
 	}, [])
+
 	return (
 		<div className='bg-black rounded-md px-3 w-full sm:w-3/12 h-fit py-3'>
 			<h2 className='text-white font-semibold text-2xl text-center mt-1'>
