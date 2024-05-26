@@ -6,6 +6,11 @@ const lvlWinMultipliers: { [key: number]: number } = {
 	3: 1.005,
 	4: 1.01,
 	5: 1.07,
+	6: 1.1,
+	7: 1.25,
+	8: 1.5,
+	9: 1.75,
+	10: 2.25,
 }
 
 const winUpdate = (

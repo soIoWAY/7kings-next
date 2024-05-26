@@ -1,5 +1,6 @@
 'use client'
 import { userStore } from '@/store/user'
+import { lvlStyles, shieldStyle } from '@/utils/strStyles'
 import { updateUserInfo } from '@/utils/userUpdate'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
@@ -21,6 +22,16 @@ const Ranks = () => {
 			case 4:
 				return 250
 			case 5:
+				return 500
+			case 6:
+				return 750
+			case 7:
+				return 1000
+			case 8:
+				return 1250
+			case 9:
+				return 1500
+			case 10:
 				return 0
 			default:
 				return 0
@@ -49,14 +60,21 @@ const Ranks = () => {
 		winsNeededForNextLevel,
 	])
 
+	const userLevelNumber = Number(userLevel)
+	const style: string = lvlStyles[userLevelNumber as keyof typeof lvlStyles]
+	const shStyle: string =
+		shieldStyle[userLevelNumber as keyof typeof shieldStyle]
+
 	return (
 		<div className='mt-8 bg-[#162A24] rounded-md flex flex-col gap-6 md:flex-row justify-between md:items-center py-6 px-4 lg:py-8 lg:px-6'>
 			<div className='flex gap-3 items-start'>
-				<MdShield className='text-5xl fill-yellow-400 rounded-full bg-yellow-400 bg-opacity-20 p-2' />
+				<MdShield
+					className={`text-5xl ${shStyle} rounded-full bg-${style} bg-opacity-20 p-2`}
+				/>
 				<div className='flex flex-col'>
 					<span className='text-white'>{username || 'User'}</span>
-					<div className='bg-yellow-400 rounded-lg bg-opacity-20 px-2 mt-1'>
-						<span className='bg-gradient-to-r from-yellow-300 to-amber-500 bg-clip-text text-transparent'>
+					<div className={`bg-${style} rounded-lg bg-opacity-20 px-2 mt-1`}>
+						<span className={`text-${style} bg-clip-text text-transparent`}>
 							Level {userLevel}
 						</span>
 					</div>
@@ -64,8 +82,8 @@ const Ranks = () => {
 			</div>
 			<div className='flex flex-col items-center'>
 				<div className='flex justify-between items-center mb-3 w-full'>
-					<div className='bg-yellow-400 rounded-lg bg-opacity-20 px-2 mt-1'>
-						<span className='bg-gradient-to-r from-yellow-300 to-amber-500 bg-clip-text text-transparent'>
+					<div className={`bg-${style} rounded-lg bg-opacity-20 px-2 mt-1`}>
+						<span className={`text-${style} bg-clip-text text-transparent`}>
 							Lvl {userLevel}
 						</span>
 					</div>
@@ -75,15 +93,17 @@ const Ranks = () => {
 						</span>
 						<span className='hidden lg:block'>to next level</span>
 					</div>
-					<div className='bg-yellow-400 rounded-lg bg-opacity-20 px-2 mt-1'>
-						<span className='bg-gradient-to-r from-yellow-300 to-amber-500 bg-clip-text text-transparent'>
+					<div className={`bg-${style} rounded-lg bg-opacity-20 px-2 mt-1`}>
+						<span className={`text-${style} bg-clip-text text-transparent`}>
 							Lvl {userLevel + 1 || 0}
 						</span>
 					</div>
 				</div>
-				<div className='h-1 block w-full lg:w-96 bg-yellow-400 bg-opacity-20 rounded-lg overflow-hidden'>
+				<div
+					className={`h-1 block w-full lg:w-96 bg-${style} bg-opacity-20 rounded-lg overflow-hidden`}
+				>
 					<div
-						className='h-full bg-yellow-500'
+						className={`h-full bg-${style}`}
 						style={{
 							width: `${(userWins / winsNeededForNextLevel(userLevel)) * 100}%`,
 						}}
