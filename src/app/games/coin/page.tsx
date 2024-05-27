@@ -58,6 +58,7 @@ const CoinPage = () => {
 				userBet={userBet}
 				interval={2000}
 				disabledAuto={true}
+				userBalance={userBalance}
 			/>
 
 			<div className='w-full sm:w-9/12 flex flex-col items-center justify-center mt-2 sm:mt-0'>

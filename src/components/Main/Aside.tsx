@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { AiOutlineStock } from 'react-icons/ai'
+import { BiSupport } from 'react-icons/bi'
 import { BsCoin } from 'react-icons/bs'
 import { FaDice, FaDiscord } from 'react-icons/fa'
 import { IoPerson } from 'react-icons/io5'
@@ -47,9 +48,15 @@ const Aside = () => {
 						</Link>
 					</li>
 					<li className={liStyle}>
-						<MdContactSupport />
+						<BiSupport />
 						<Link href='/support' className={linkStyle}>
 							Support
+						</Link>
+					</li>
+					<li className={liStyle}>
+						<MdContactSupport />
+						<Link href='/help' className={linkStyle}>
+							Help
 						</Link>
 					</li>
 				</ul>
