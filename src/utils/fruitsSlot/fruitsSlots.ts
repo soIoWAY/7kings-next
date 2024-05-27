@@ -3,14 +3,14 @@ import { updateUserInfo } from '../userUpdate'
 
 const lvlWinMultipliers: { [key: number]: number } = {
 	2: 1.002,
-	3: 1.005,
-	4: 1.01,
-	5: 1.07,
+	3: 1.003,
+	4: 1.05,
+	5: 1.08,
 	6: 1.1,
 	7: 1.25,
 	8: 1.5,
 	9: 1.75,
-	10: 2.25,
+	10: 2,
 }
 
 const winUpdate = (
