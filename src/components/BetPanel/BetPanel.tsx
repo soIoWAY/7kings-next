@@ -10,6 +10,7 @@ interface BetPanel {
 	userBet: number
 	interval: number
 	disabledAuto: boolean
+	userBalance: number
 }
 
 const BetPanel = ({
@@ -19,6 +20,7 @@ const BetPanel = ({
 	userBet,
 	interval,
 	disabledAuto,
+	userBalance,
 }: BetPanel) => {
 	const userWins = userStore((state: any) => state.wins)
 	const userLoses = userStore((state: any) => state.loses)
@@ -120,7 +122,7 @@ const BetPanel = ({
 						value={userBet}
 						onChange={e => {
 							const roundedValue = Math.round(parseInt(e.target.value))
-							roundedValue > 900 || roundedValue <= 0
+							roundedValue > 99000 || roundedValue <= 0
 								? setUserBet(0)
 								: setUserBet(parseInt(e.target.value))
 						}}
@@ -130,13 +132,21 @@ const BetPanel = ({
 					<div className='mb-1'>
 						<button
 							className={`${betChooseButtons} rounded-bl-md border-r border-r-[#1a1a1a] bg-zinc-600`}
-							onClick={() => setUserBet(userBet / 2)}
+							onClick={() => {
+								const newBet = Math.round(userBet / 2)
+								setUserBet(newBet)
+							}}
 						>
 							1/2
 						</button>
 						<button
 							className={`${betChooseButtons}  rounded-br-md bg-zinc-600`}
-							onClick={() => setUserBet(userBet * 2)}
+							onClick={() => {
+								const newBet = userBet * 2
+								if (newBet <= userBalance) {
+									setUserBet(newBet)
+								}
+							}}
 						>
 							x2
 						</button>

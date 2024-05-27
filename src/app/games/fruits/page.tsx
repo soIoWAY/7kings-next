@@ -24,10 +24,10 @@ export default function FruitsPage() {
 	const updateFruitsHandler = () => {
 		const delay = 180
 		const decreasedBalance = userBalance - userBet
-		userStore.setState({ balance: decreasedBalance })
-		updateUserInfo(undefined, undefined, decreasedBalance, undefined)
 		if (userBet >= 1) {
 			if (decreasedBalance > 0) {
+				userStore.setState({ balance: decreasedBalance })
+				updateUserInfo(undefined, undefined, decreasedBalance, undefined)
 				setIsAnimatingCompleted(false)
 				if (decreasedBalance > 0) {
 					setDisabledBetButton(true)
@@ -42,9 +42,9 @@ export default function FruitsPage() {
 						setDisabledBetButton(false)
 						setIsAnimatingCompleted(true)
 					}, delay * 3)
-				} else {
-					alert('Недостатньо грошей на балансі')
 				}
+			} else {
+				alert('Недостатньо грошей на балансі')
 			}
 		} else {
 			alert('Сума ставки повинна бути більшою за один')
@@ -84,6 +84,7 @@ export default function FruitsPage() {
 				disabledBetButton={disabledBetButton}
 				setUserBet={setUserBet}
 				userBet={userBet}
+				userBalance={userBalance}
 				interval={1550}
 				disabledAuto={true}
 			/>
