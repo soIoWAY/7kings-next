@@ -1,6 +1,5 @@
 'use client'
 import { userStore } from '@/store/user'
-import { lvlStyles, shieldStyle } from '@/utils/strStyles'
 import { updateUserInfo } from '@/utils/userUpdate'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
@@ -47,7 +46,7 @@ const Ranks = () => {
 			updateUserInfo(undefined, undefined, undefined, newLevel)
 		}
 
-		if (userLevel < 5) {
+		if (userLevel < 10) {
 			setWinsToNextLevel(neededWins - userWins)
 		} else {
 			setWinsToNextLevel(0)
@@ -60,50 +59,67 @@ const Ranks = () => {
 		winsNeededForNextLevel,
 	])
 
-	const userLevelNumber = Number(userLevel)
-	const style: string = lvlStyles[userLevelNumber as keyof typeof lvlStyles]
-	const shStyle: string =
-		shieldStyle[userLevelNumber as keyof typeof shieldStyle]
+	let userLevelNumber = 10 // Number(userLevel)
+	let style
+	let progressStyle
+	let shieldStyle
+	if (userLevelNumber === 1) {
+		style = 'text-white bg-zinc-200 bg-opacity-20 px-2 rounded-md'
+		progressStyle = 'bg-zinc-200'
+		shieldStyle =
+			'text-5xl fill-white bg-zinc-200 bg-opacity-20 rounded-full p-2'
+	} else if (userLevelNumber === 2 || userLevelNumber === 3) {
+		style = 'text-green-500 bg-green-500 bg-opacity-20 px-2 rounded-md'
+		progressStyle = 'bg-green-500'
+		shieldStyle =
+			'text-5xl fill-green-500 bg-green-500 bg-opacity-20 rounded-full p-2'
+	} else if (
+		userLevelNumber === 4 ||
+		userLevelNumber === 5 ||
+		userLevelNumber === 6 ||
+		userLevelNumber === 7
+	) {
+		style = 'text-yellow-500 bg-yellow-500 bg-opacity-20 px-2 rounded-md'
+		progressStyle = 'bg-yellow-500'
+		shieldStyle =
+			'text-5xl fill-yellow-500 bg-yellow-500 bg-opacity-20 rounded-full p-2'
+	} else if (userLevelNumber === 8 || userLevelNumber === 9) {
+		style = 'text-orange-600 bg-orange-600 bg-opacity-20 px-2 rounded-md'
+		progressStyle = 'bg-orange-600'
+		shieldStyle =
+			'text-5xl fill-orange-600 bg-orange-600 bg-opacity-20 rounded-full p-2'
+	} else if (userLevelNumber === 10) {
+		style = 'text-red-600 bg-red-600 bg-opacity-20 px-2 rounded-md'
+		progressStyle = 'bg-red-600'
+		shieldStyle =
+			'text-5xl fill-red-600 bg-red-600 bg-opacity-20 rounded-full p-2'
+	}
 
 	return (
 		<div className='mt-8 bg-[#162A24] rounded-md flex flex-col gap-6 md:flex-row justify-between md:items-center py-6 px-4 lg:py-8 lg:px-6'>
 			<div className='flex gap-3 items-start'>
-				<MdShield
-					className={`text-5xl ${shStyle} rounded-full bg-${style} bg-opacity-20 p-2`}
-				/>
+				<MdShield className={shieldStyle} />
 				<div className='flex flex-col'>
 					<span className='text-white'>{username || 'User'}</span>
-					<div className={`bg-${style} rounded-lg bg-opacity-20 px-2 mt-1`}>
-						<span className={`text-${style} bg-clip-text text-transparent`}>
-							Level {userLevel}
-						</span>
-					</div>
+					<span className={style}>Level {userLevel}</span>
 				</div>
 			</div>
 			<div className='flex flex-col items-center'>
 				<div className='flex justify-between items-center mb-3 w-full'>
-					<div className={`bg-${style} rounded-lg bg-opacity-20 px-2 mt-1`}>
-						<span className={`text-${style} bg-clip-text text-transparent`}>
-							Lvl {userLevel}
-						</span>
-					</div>
+					<span className={style}>Lvl {userLevel}</span>
 					<div className='flex gap-2'>
 						<span className='text-white font-semibold'>
 							{winsToNextLevel} wins
 						</span>
 						<span className='hidden lg:block'>to next level</span>
 					</div>
-					<div className={`bg-${style} rounded-lg bg-opacity-20 px-2 mt-1`}>
-						<span className={`text-${style} bg-clip-text text-transparent`}>
-							Lvl {userLevel + 1 || 0}
-						</span>
-					</div>
+					<span className={style}>Lvl {userLevel + 1 || 0}</span>
 				</div>
 				<div
-					className={`h-1 block w-full lg:w-96 bg-${style} bg-opacity-20 rounded-lg overflow-hidden`}
+					className={`h-1 block w-full lg:w-96 ${progressStyle} bg-opacity-20 rounded-lg overflow-hidden`}
 				>
 					<div
-						className={`h-full bg-${style}`}
+						className={`h-full ${progressStyle}`}
 						style={{
 							width: `${(userWins / winsNeededForNextLevel(userLevel)) * 100}%`,
 						}}
