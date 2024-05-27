@@ -59,7 +59,7 @@ const Ranks = () => {
 		winsNeededForNextLevel,
 	])
 
-	let userLevelNumber = 10 // Number(userLevel)
+	let userLevelNumber = Number(userLevel)
 	let style
 	let progressStyle
 	let shieldStyle
@@ -93,6 +93,11 @@ const Ranks = () => {
 		progressStyle = 'bg-red-600'
 		shieldStyle =
 			'text-5xl fill-red-600 bg-red-600 bg-opacity-20 rounded-full p-2'
+	} else {
+		style = 'text-white bg-zinc-200 bg-opacity-20 px-2 rounded-md'
+		progressStyle = 'bg-zinc-200'
+		shieldStyle =
+			'text-5xl fill-white bg-zinc-200 bg-opacity-20 rounded-full p-2'
 	}
 
 	return (
