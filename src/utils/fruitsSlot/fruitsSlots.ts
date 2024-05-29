@@ -2,11 +2,11 @@ import { userStore } from '@/store/user'
 import { updateUserInfo } from '../userUpdate'
 
 const lvlWinMultipliers: { [key: number]: number } = {
-	2: 1.002,
-	3: 1.003,
-	4: 1.05,
-	5: 1.08,
-	6: 1.1,
+	2: 1.003,
+	3: 1.005,
+	4: 1.07,
+	5: 1.1,
+	6: 1.15,
 	7: 1.25,
 	8: 1.5,
 	9: 1.75,
