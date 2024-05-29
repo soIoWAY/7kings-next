@@ -40,7 +40,7 @@ const Ranks = () => {
 	useEffect(() => {
 		const neededWins = winsNeededForNextLevel(userLevel)
 
-		if (userWins >= neededWins && userLevel < 5) {
+		if (userWins >= neededWins && userLevel < 10) {
 			const newLevel = userLevel + 1
 			userStore.setState({ level: newLevel })
 			updateUserInfo(undefined, undefined, undefined, newLevel)
