@@ -98,6 +98,10 @@ export default function HelpPage() {
 						<li className='text-red-600'>Lvl 10 - 100%</li>
 					</ul>
 				</section>
+				<section id='referral'>
+					<h2 className='text-3xl font-semibold mb-2'>Referral system</h2>
+					<p className='leading-relaxed'></p>
+				</section>
 				<section id='support'>
 					<h2 className='text-3xl font-semibold mb-2'>Support</h2>
 					<p className='leading-relaxed'>

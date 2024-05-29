@@ -17,7 +17,7 @@ const Aside = () => {
 				<ul className='flex flex-col gap-4'>
 					<li className={liStyle}>
 						<AiOutlineStock />
-						<Link href='/crash' className={linkStyle}>
+						<Link href='/comingSoon' className={linkStyle}>
 							Crash
 						</Link>
 					</li>
@@ -29,7 +29,7 @@ const Aside = () => {
 					</li>
 					<li className={liStyle}>
 						<FaDice />
-						<Link href='/dice' className={linkStyle}>
+						<Link href='/comingSoon' className={linkStyle}>
 							Dice
 						</Link>
 					</li>
@@ -43,13 +43,13 @@ const Aside = () => {
 				<ul className='flex flex-col gap-4 pt-4 mt-4 border-t border-gray-400'>
 					<li className={liStyle}>
 						<IoPerson className='' />
-						<Link href='/referrals' className={linkStyle}>
+						<Link href='/help#referral' className={linkStyle}>
 							Referrals
 						</Link>
 					</li>
 					<li className={liStyle}>
 						<BiSupport />
-						<Link href='/support' className={linkStyle}>
+						<Link href='/help#support' className={linkStyle}>
 							Support
 						</Link>
 					</li>

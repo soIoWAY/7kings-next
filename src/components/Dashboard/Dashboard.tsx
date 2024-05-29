@@ -89,7 +89,7 @@ const Dashboard = () => {
 							</div>
 						</div>
 					</div>
-					<div>
+					<div id='referral'>
 						{promocode ? (
 							<div className='flex flex-col gap-1'>
 								<h2 className='text-xl font-bold'>Promo & referrals</h2>

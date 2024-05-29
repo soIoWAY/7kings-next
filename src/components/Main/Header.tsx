@@ -2,8 +2,9 @@
 import { userStore } from '@/store/user'
 import { formattedBalanceToK } from '@/utils/formattedBalanceToK'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiOutlineStock } from 'react-icons/ai'
+import { BiSupport } from 'react-icons/bi'
 import { BsCoin } from 'react-icons/bs'
 import { FaDice, FaDiscord } from 'react-icons/fa'
 import { GiMeepleKing } from 'react-icons/gi'
@@ -11,6 +12,7 @@ import { IoPerson } from 'react-icons/io5'
 import { MdContactSupport } from 'react-icons/md'
 import { PiNumberSquareSevenFill, PiSwordBold } from 'react-icons/pi'
 import { RxHamburgerMenu } from 'react-icons/rx'
+import styles from './Header.module.css'
 const Header = () => {
 	const [isAsideOpen, setIsAsideOpen] = useState(false)
 	const userBalance = userStore((state: any) => state.balance)
@@ -18,6 +20,17 @@ const Header = () => {
 	const liStyle =
 		'flex items-center text-xl gap-3 hover:text-green-400 transition-all tracking-widest'
 	const linkStyle = 'hover:text-white transition-all flex-1'
+
+	useEffect(() => {
+		if (isAsideOpen) {
+			document.body.style.overflow = 'hidden'
+		} else {
+			document.body.style.overflow = 'auto'
+		}
+		return () => {
+			document.body.style.overflow = 'auto'
+		}
+	}, [isAsideOpen])
 
 	return (
 		<div className='flex justify-between'>
@@ -74,9 +87,10 @@ const Header = () => {
 					</Link>
 				)}
 			</div>
+
 			<div
-				className={`fixed top-0 left-0 bottom-0 right-0 bg-black bg-opacity-95 z-50 ${
-					isAsideOpen ? 'block' : 'hidden'
+				className={`${styles.asideMenu} ${
+					isAsideOpen ? styles.asideMenuOpen : ''
 				}`}
 			>
 				<div className='flex justify-end pt-3 pr-4 text-white'>
@@ -91,7 +105,7 @@ const Header = () => {
 					<ul className='flex items-start flex-col gap-4'>
 						<li className={liStyle}>
 							<AiOutlineStock />
-							<Link href='/crash' className={linkStyle}>
+							<Link href='/comingSoon' className={linkStyle}>
 								Crash
 							</Link>
 						</li>
@@ -103,7 +117,7 @@ const Header = () => {
 						</li>
 						<li className={liStyle}>
 							<FaDice />
-							<Link href='/dice' className={linkStyle}>
+							<Link href='/comingSoon' className={linkStyle}>
 								Dice
 							</Link>
 						</li>
@@ -115,13 +129,19 @@ const Header = () => {
 						</li>
 						<li className={liStyle}>
 							<IoPerson className='' />
-							<Link href='/referrals' className={linkStyle}>
+							<Link href='/dashboard#referral' className={linkStyle}>
 								Referrals
 							</Link>
 						</li>
 						<li className={liStyle}>
 							<MdContactSupport />
-							<Link href='/support' className={linkStyle}>
+							<Link href='/help' className={linkStyle}>
+								Help
+							</Link>
+						</li>
+						<li className={liStyle}>
+							<BiSupport />
+							<Link href='/help#support' className={linkStyle}>
 								Support
 							</Link>
 						</li>
@@ -132,6 +152,7 @@ const Header = () => {
 						Discord
 					</button>
 				</div>
+				-
 			</div>
 		</div>
 	)
