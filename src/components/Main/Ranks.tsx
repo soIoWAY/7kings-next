@@ -118,7 +118,9 @@ const Ranks = () => {
 						</span>
 						<span className='hidden lg:block'>to next level</span>
 					</div>
-					<span className={style}>Lvl {userLevel + 1 || 0}</span>
+					<span className={style}>
+						Lvl {userLevel < 10 ? userLevel + 1 || 0 : 10}
+					</span>
 				</div>
 				<div
 					className={`h-1 block w-full lg:w-96 ${progressStyle} bg-opacity-20 rounded-lg overflow-hidden`}
