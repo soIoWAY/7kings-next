@@ -40,6 +40,7 @@ const Card = ({
 					<Link
 						href='/dashboard'
 						className='text-white bg-white bg-opacity-30 rounded-full w-8 h-8 mt-5 flex items-center justify-center'
+						aria-label='dashboard link'
 					>
 						<IoIosArrowForward />
 					</Link>

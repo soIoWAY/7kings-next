@@ -38,6 +38,7 @@ const Header = () => {
 				<button
 					className='text-2xl text-white block lg:hidden'
 					onClick={() => setIsAsideOpen(!isAsideOpen)}
+					aria-label='hamburger menu'
 				>
 					<RxHamburgerMenu />
 				</button>
@@ -152,7 +153,6 @@ const Header = () => {
 						Discord
 					</button>
 				</div>
-				-
 			</div>
 		</div>
 	)
